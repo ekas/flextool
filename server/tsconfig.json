@@ -18,12 +18,13 @@
       "@repositories/*": ["src/repositories/*"],
       "@entities/*": ["src/entities/*"],
       "@dto/*": ["src/dto/*"]
-    }
-    // "skipLibCheck": true,
-    // "strictNullChecks": false,
-    // "noImplicitAny": false,
-    // "strictBindCallApply": false,
-    // "forceConsistentCasingInFileNames": false,
-    // "noFallthroughCasesInSwitch": false
+    },
+    // Not wanted properties
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false
   }
 }
