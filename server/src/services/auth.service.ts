@@ -46,14 +46,8 @@ export class AuthService {
       };
 
       return {
-        id: user.id,
+        ...user,
         access_token: this.jwtService.sign(payload),
-        email: user.email,
-        first_name: user.firstName,
-        last_name: user.lastName,
-        avatar_id: user.avatarId,
-        role: user.role,
-        user,
       };
     } else {
       throw new UnauthorizedException('Invalid credentials');
