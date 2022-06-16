@@ -16,6 +16,7 @@
       "@services/*": ["src/services/*"],
       "@controllers/*": ["src/controllers/*"],
       "@repositories/*": ["src/repositories/*"],
+      "@modules/*": ["src/modules/*"],
       "@entities/*": ["src/entities/*"],
       "@dto/*": ["src/dto/*"]
     },

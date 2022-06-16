@@ -3,12 +3,12 @@ import { IsString, IsOptional, IsNotEmpty, IsEmail } from 'class-validator';
 export class UserDto {
   @IsString()
   @IsNotEmpty()
-  first_name: string;
+  firstName: string;
 
   @IsString()
   @IsOptional()
   @IsNotEmpty()
-  last_name: string;
+  lastName: string;
 
   @IsString()
   @IsNotEmpty()
@@ -23,6 +23,17 @@ export class UserDto {
   password: string;
 
   @IsString()
+  @IsOptional()
   @IsNotEmpty()
   token: string;
+}
+
+export class UserLoginDto {
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
 }

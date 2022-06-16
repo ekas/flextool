@@ -17,7 +17,7 @@ export const databaseOrmConfig = () => {
       max: 25,
     },
     entities: entitiesDir,
-    synchronize: false,
+    synchronize: true,
     uuidExtension: 'pgcrypto',
     logging: data.ORM_LOGGING || false,
     keepConnectionAlive: true,

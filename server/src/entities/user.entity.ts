@@ -11,7 +11,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import bcrypt from 'bcrypt';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const bcrypt = require('bcrypt');
 
 @Entity({ name: 'users' })
 export class User extends BaseEntity {
@@ -19,7 +20,9 @@ export class User extends BaseEntity {
   @BeforeUpdate()
   hashPassword(): void {
     if (this.password) {
-      this.password = bcrypt.hashSync(this.password, 10);
+      const saltRounds = 10;
+      const salt = bcrypt.genSaltSync(saltRounds);
+      this.password = bcrypt.hashSync(this.password, salt);
     }
   }
   @PrimaryGeneratedColumn('uuid')
