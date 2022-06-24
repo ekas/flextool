@@ -20,7 +20,7 @@ export const LoginPage: FC<LoginProps> = () => {
             <h1 className="loginHeading">Welcome</h1>
             <h4 className="loginSubHeading">
               Need to create a new acount?{" "}
-              <a className="anchorLinkStyle" href="/">
+              <a className="anchorLinkStyle" href="/logup">
                 Sign up
               </a>{" "}
               here.

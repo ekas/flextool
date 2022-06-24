@@ -20,7 +20,7 @@ export const LogupPage: FC<LogupProps> = () => {
             <h1 className="logupHeading">Welcome, Let’s get you set up</h1>
             <h4 className="logupSubHeading">
               If you are already using FlexTool, you can{" "}
-              <a className="anchorLinkStyle" href="/">
+              <a className="anchorLinkStyle" href="/login">
                 Sign in
               </a>
               .
