@@ -1,0 +1,54 @@
+.logupContainer {
+  width: 100vw;
+  height: 100vh;
+  align-content: center;
+  background: var(--grey-background);
+}
+
+.logupWrapper {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.logupFormContainer {
+  padding: 50px 0;
+  width: 500px;
+  min-height: 400px;
+  border-radius: 5px;
+  background-color: var(--white);
+}
+
+.logupForm {
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.logupHeading {
+  color: var(--primary);
+}
+
+.logupSubHeading {
+  color: var(--grey-light);
+  margin-top: -15px;
+}
+
+.logupFormItem {
+  margin-top: 20px;
+}
+
+.logupFormItemForget {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logupFormBtn {
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  background: var(--primary);
+}
+
+.logupFormBtn:hover {
+  background: var(--secondary);
+}
