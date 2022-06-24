@@ -2,7 +2,7 @@ import { Button, Col, Form, Input, Row } from "antd";
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo.svg";
 import { FC } from "react";
-import "./index.css";
+import "./index.less";
 
 type LogupProps = {};
 

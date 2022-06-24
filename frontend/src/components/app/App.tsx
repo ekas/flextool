@@ -1,7 +1,8 @@
-import "./App.css";
+import "./App.less";
 import { LoginPage } from "components/login/LoginPage";
 import { LogupPage } from "components/logup/LogupPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { AppsPages } from "components/apps/AppsPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
             <Route path="" element={<LoginPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="logup" element={<LogupPage />} />
+            <Route path="apps" element={<AppsPages />} />
             <Route
               path="*"
               element={
