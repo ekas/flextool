@@ -44,11 +44,18 @@
 
 .loginFormBtn {
   width: 100%;
-  margin-top: 10px;
   border: none;
   background: var(--primary);
 }
 
 .loginFormBtn:hover {
   background: var(--secondary);
+}
+
+.loginFormBtnGoogle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80% !important;
+  margin: 0 auto;
 }

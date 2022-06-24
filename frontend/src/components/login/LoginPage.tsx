@@ -1,5 +1,5 @@
 import { Button, Checkbox, Col, Form, Input, Row } from "antd";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { LockOutlined, MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo.svg";
 import { FC } from "react";
 import "./index.css";
@@ -25,6 +25,15 @@ export const LoginPage: FC<LoginProps> = () => {
               </a>{" "}
               here.
             </h4>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="loginFormBtn loginFormBtnGoogle"
+            >
+              <GoogleOutlined style={{ fontSize: "20px", marginTop: "2px" }} />{" "}
+              <span> Sign in with Google</span>
+            </Button>
+
             <Form
               name="normal_login"
               className="loginForm"
@@ -39,7 +48,7 @@ export const LoginPage: FC<LoginProps> = () => {
                 ]}
               >
                 <Input
-                  prefix={<UserOutlined />}
+                  prefix={<MailOutlined />}
                   type="email"
                   placeholder="Email"
                 />
