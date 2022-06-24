@@ -1,7 +1,8 @@
-import { Button, Checkbox, Col, Form, Input, Row } from "antd";
+import { Button, Checkbox, Col, Form, Input, Row, Typography } from "antd";
 import { LockOutlined, MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo.svg";
 import { FC } from "react";
+import { Link } from "react-router-dom";
 import "./index.less";
 
 type LoginProps = {};
@@ -17,14 +18,14 @@ export const LoginPage: FC<LoginProps> = () => {
         <Col span={24} className="loginWrapper">
           <div className="loginFormContainer">
             <img src={logo} alt="Logo" />
-            <h1 className="loginHeading">Welcome</h1>
-            <h4 className="loginSubHeading">
+            <Typography.Text className="loginHeading">Welcome</Typography.Text>
+            <Typography.Text className="loginSubHeading">
               Need to create a new acount?{" "}
-              <a className="anchorLinkStyle" href="/logup">
+              <Link className="anchorLinkStyle" to="/logup">
                 Sign up
-              </a>{" "}
+              </Link>{" "}
               here.
-            </h4>
+            </Typography.Text>
             <Button
               type="primary"
               htmlType="submit"
@@ -68,9 +69,9 @@ export const LoginPage: FC<LoginProps> = () => {
               </Form.Item>
               <div className="loginFormItemForget">
                 <Checkbox>Remember me</Checkbox>
-                <a className="anchorLinkStyle" href="/">
+                <Link className="anchorLinkStyle" to="/">
                   Forgot password
-                </a>
+                </Link>
               </div>
               <Form.Item>
                 <Button
@@ -78,7 +79,7 @@ export const LoginPage: FC<LoginProps> = () => {
                   htmlType="submit"
                   className="loginFormBtn"
                 >
-                  Sign in
+                  Sign In
                 </Button>
               </Form.Item>
             </Form>

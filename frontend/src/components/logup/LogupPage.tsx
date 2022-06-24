@@ -1,8 +1,9 @@
-import { Button, Col, Form, Input, Row } from "antd";
+import { Button, Col, Form, Input, Row, Typography } from "antd";
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo.svg";
 import { FC } from "react";
 import "./index.less";
+import { Link } from "react-router-dom";
 
 type LogupProps = {};
 
@@ -17,14 +18,16 @@ export const LogupPage: FC<LogupProps> = () => {
         <Col span={24} className="logupWrapper">
           <div className="logupFormContainer">
             <img src={logo} alt="Logo" />
-            <h1 className="logupHeading">Welcome, Let’s get you set up</h1>
-            <h4 className="logupSubHeading">
+            <Typography.Text className="loginHeading">
+              Welcome, Let’s get you set up
+            </Typography.Text>
+            <Typography.Text className="logupSubHeading">
               If you are already using FlexTool, you can{" "}
-              <a className="anchorLinkStyle" href="/login">
+              <Link className="anchorLinkStyle" to="/login">
                 Sign in
-              </a>
+              </Link>
               .
-            </h4>
+            </Typography.Text>
             <Form
               name="normal_login"
               className="logupForm"
@@ -89,7 +92,7 @@ export const LogupPage: FC<LogupProps> = () => {
                   htmlType="submit"
                   className="logupFormBtn"
                 >
-                  Sign up
+                  Sign Up
                 </Button>
               </Form.Item>
             </Form>
