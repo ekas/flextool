@@ -1,4 +1,13 @@
-import { Button, Checkbox, Col, Form, Input, Row, Typography } from "antd";
+import {
+  Button,
+  Checkbox,
+  Col,
+  Divider,
+  Form,
+  Input,
+  Row,
+  Typography,
+} from "antd";
 import { LockOutlined, MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo.svg";
 import { FC } from "react";
@@ -34,7 +43,9 @@ export const LoginPage: FC<LoginProps> = () => {
               <GoogleOutlined style={{ fontSize: "20px", marginTop: "2px" }} />{" "}
               <span> Sign in with Google</span>
             </Button>
-
+            <Divider plain className="loginDivider">
+              or
+            </Divider>
             <Form
               name="normal_login"
               className="loginForm"
