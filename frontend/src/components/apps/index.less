@@ -4,17 +4,64 @@
 }
 
 .navBarContainer {
+  top: 0;
+  width: 100%;
+  width: 100%;
+  z-index: 999;
   display: flex;
+  position: fixed;
   align-items: center;
   justify-content: space-between;
+  background-color: var(--white);
 }
 
 .menuContainer {
-  align-items: center;
+  width: 100%;
   position: relative;
-
+  align-items: center;
 }
 
 .menuAvatar {
+  right: 0;
+  position: absolute;
   margin-right: 15px;
+}
+
+.mainContainer {
+  margin-top: 80px;
+}
+
+.leftCol {
+  left: 0;
+  position: fixed;
+  text-align: left;
+  padding-left: 150px !important;
+}
+
+.rightCol {
+  margin-left: 400px;
+  text-align: left;
+}
+.rightHeaderContainer {
+  margin-right: 200px;
+}
+
+.rightHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.creatNewBtn {
+  width: 130px;
+  margin-top: 0 !important;
+}
+
+.searchField {
+  width: 200px;
+  margin-right: 20px;
+}
+
+.appsDivider {
+  margin: 0 0 10px !important;
 }
