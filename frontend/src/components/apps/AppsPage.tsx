@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { FC } from "react";
+import { FC } from "react";
 import {
-  Avatar,
   Button,
   Checkbox,
   Col,
@@ -11,17 +10,14 @@ import {
   List,
   Menu,
   Row,
-  Space,
 } from "antd";
-import { UserOutlined, CaretDownOutlined } from "@ant-design/icons";
-import logo from "../../assets/logo.svg";
 import appAvatar from "../../assets/app_avatar.svg";
 import popMenu from "../../assets/pop_menu.svg";
-import appsIcon from "../../assets/apps.svg";
-import dataSourcesIcon from "../../assets/datasource.svg";
-import "./index.less";
 import { Link } from "react-router-dom";
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
+import NavBarPage from "components/navbar/NavBarPage";
+
+import "./index.less";
 
 export const AppsPages: FC = () => {
   const { Search } = Input;
@@ -39,46 +35,7 @@ export const AppsPages: FC = () => {
 
   return (
     <>
-      <div className="navBarContainer">
-        <Menu
-          mode="horizontal"
-          defaultSelectedKeys={["apps"]}
-          className="menuContainer"
-        >
-          <img src={logo} alt="Logo" className="appLogo" />
-          <Menu.Item
-            key="apps"
-            icon={<img src={appsIcon} alt="Apps Menu" className="menuIcon" />}
-          >
-            Apps
-          </Menu.Item>
-          <Menu.Item
-            key="datasource"
-            icon={
-              <img
-                src={dataSourcesIcon}
-                alt="Data Source Menu"
-                className="menuIcon"
-              />
-            }
-          >
-            Data Sources
-          </Menu.Item>
-        </Menu>
-        <Dropdown
-          overlay={userMenu}
-          className="menuAvatar"
-          arrow
-          placement="bottomRight"
-        >
-          <a onClick={(e) => e.preventDefault()}>
-            <Space>
-              <Avatar size={35} icon={<UserOutlined />} />
-              <CaretDownOutlined />
-            </Space>
-          </a>
-        </Dropdown>
-      </div>
+      <NavBarPage />
       <Row className="mainContainer" gutter={16}>
         <Col className="gutter-row leftCol" span={6}>
           <div className="">
@@ -117,7 +74,7 @@ export const AppsPages: FC = () => {
                 onChange: (page) => {
                   console.log(page);
                 },
-                pageSize: 8,
+                pageSize: 5,
               }}
               dataSource={data}
               renderItem={(item) => (
@@ -152,22 +109,6 @@ export const AppsPages: FC = () => {
     </>
   );
 };
-
-const userMenu = (
-  <Menu
-    items={[
-      {
-        key: "1",
-        label: <Link to="/">Profile</Link>,
-      },
-      {
-        key: "2",
-        danger: true,
-        label: <Link to="/">Logout</Link>,
-      },
-    ]}
-  />
-);
 
 const appMenu = (
   <Menu
