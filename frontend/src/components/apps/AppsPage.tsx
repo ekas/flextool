@@ -19,19 +19,23 @@ import NavBarPage from "components/navbar/NavBarPage";
 
 import "./index.less";
 
-export const AppsPages: FC = () => {
+interface App {
+  href: string;
+  title: string;
+  description: string;
+}
+
+type AppsPageProps = {
+  apps: App[];
+};
+
+export const AppsPages: FC<AppsPageProps> = ({ apps }) => {
   const { Search } = Input;
 
   const onSearch = (value: string) => console.log(value);
   const onChange = (e: CheckboxChangeEvent) => {
     console.log(`checked = ${e.target.checked}`);
   };
-
-  const data = Array.from({ length: 23 }).map((_, i) => ({
-    href: "/",
-    title: `Onboarding Page ${i}`,
-    description: "Edited 2 months ago",
-  }));
 
   return (
     <>
@@ -76,7 +80,7 @@ export const AppsPages: FC = () => {
                 },
                 pageSize: 5,
               }}
-              dataSource={data}
+              dataSource={apps}
               renderItem={(item) => (
                 <List.Item
                   key={item.title}
@@ -97,7 +101,7 @@ export const AppsPages: FC = () => {
                     avatar={
                       <img src={appAvatar} alt="App Avatar" className="" />
                     }
-                    title={<a href="https://ant.design">{item.title}</a>}
+                    title={<Link to={item.href}>{item.title}</Link>}
                     description={item.description}
                   />
                 </List.Item>
