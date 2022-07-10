@@ -1,0 +1,27 @@
+.pageContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.pageLeft {
+  width: calc(100vw - 370px);
+}
+
+.pageRight {
+  width: 370px;
+}
+
+.draggableComponentContainer {
+  gap: 5px;
+  width: 100%;
+  display: flex;
+  padding: 5px 0;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  margin-top: 46px;
+  justify-content: center;
+  min-height: calc(100vh - 46px);
+  max-height: calc(100vh - 46px);
+  border-left: 2px solid black;
+}

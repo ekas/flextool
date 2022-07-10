@@ -3,7 +3,7 @@ import { LoginPage } from "components/login/LoginPage";
 import { LogupPage } from "components/logup/LogupPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AppsPages } from "components/apps/AppsPage";
-import PageLayout from "components/PageLayout/PageLayout";
+import PageLayout from "components/pageLayout/PageLayout";
 
 function App() {
   const data = Array.from({ length: 23 }).map((_, i) => ({
