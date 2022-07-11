@@ -39,7 +39,7 @@ export const AppsPages: FC<AppsPageProps> = ({ apps }) => {
 
   return (
     <>
-      <NavBarPage />
+      <NavBarPage type="apps" />
       <Row className="mainContainer" gutter={16}>
         <Col className="gutter-row leftCol" span={6}>
           <div className="">
