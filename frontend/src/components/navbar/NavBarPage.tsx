@@ -9,7 +9,7 @@ import {
 import logo from "../../assets/logo.svg";
 import appsIcon from "../../assets/apps.svg";
 import dataSourcesIcon from "../../assets/datasource.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./index.less";
 
@@ -18,6 +18,7 @@ interface NavBarPageProps {
 }
 
 const NavBarPage: FC<NavBarPageProps> = ({ type }) => {
+  const navigate = useNavigate();
   return (
     <>
       {type === "apps" ? (
@@ -75,6 +76,13 @@ const NavBarPage: FC<NavBarPageProps> = ({ type }) => {
           </Button>
           <Button type="primary" htmlType="submit" className="saveBtn">
             Save
+          </Button>
+          <Button
+            htmlType="submit"
+            className="backBtn"
+            onClick={() => navigate(-1)}
+          >
+            Back
           </Button>
           <Dropdown
             overlay={userMenu}
