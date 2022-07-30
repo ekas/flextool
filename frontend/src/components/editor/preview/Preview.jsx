@@ -56,6 +56,7 @@ const Preview = () => {
         return createElement(
           PreviewContainer,
           {
+            kay: index,
             index,
             onClick: clickHandler,
             focused: focused === index ? true : false,
@@ -68,7 +69,7 @@ const Preview = () => {
 
   return (
     <div ref={drop} className="previewContainer">
-      {componentPreview}
+      <div className="previewContainer2">{componentPreview}</div>
     </div>
   );
 };

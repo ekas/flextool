@@ -1,8 +1,24 @@
 .previewContainer {
+  top: 47px;
+  left: 1px;
+  height: 100%;
+  right: 360px;
+  position: fixed;
+  transform: scale(1);
+  border: green 1px solid;
+  min-height: 2400px;
+  max-height: 2400px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+.previewContainer2 {
   width: 100%;
-  overflow-y: auto;
-  margin-top: 46px;
-  border-right: 2px solid black;
-  min-height: calc(100vh - 46px);
-  max-height: calc(100vh - 46px);
+  position: absolute;
+  min-height: 2400px;
+  max-height: 2400px;
+}
+
+.dnd-container {
+  padding: 20px 0;
 }
