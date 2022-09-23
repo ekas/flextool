@@ -4,30 +4,78 @@
 
 Table User {
   id String [pk]
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
+  firstName String [not null]
+  lastName String [not null]
   email String [unique, not null]
   password String [not null]
-  firstname String
-  lastname String
-  posts Post [not null]
-  role Role [not null]
-}
-
-Table Post {
-  id String [pk]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  published Boolean [not null]
-  title String [not null]
-  content String
-  author User
-  authorId String
+  role Role [not null]
+  App App [not null]
+  Comment Comment [not null]
+}
+
+Table App {
+  id String [pk]
+  name String [unique, not null]
+  slug String [not null]
+  isPublic Boolean [not null, default: false]
+  dataDefintion Json
+  user User [not null]
+  userId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  AppComponent AppComponent [not null]
+  Comment Comment [not null]
+}
+
+Table Comment {
+  id String [pk]
+  text String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  user User [not null]
+  userId String [not null]
+  app App [not null]
+  appId String [not null]
+}
+
+Table AppComponent {
+  id String [pk]
+  name String [unique, not null]
+  x Int [not null]
+  y Int [not null]
+  width Int [not null]
+  height Int [not null]
+  properties Json
+  app App [not null]
+  appId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  ComponentData ComponentData
+}
+
+Table ComponentData {
+  id String [pk]
+  data Json
+  appComponent AppComponent [not null]
+  appComponentId String [unique, not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
 }
 
 Enum Role {
   ADMIN
-  USER
+  DEVELOPER
+  OPERATOR
 }
 
-Ref: Post.authorId > User.id
+Ref: App.userId > User.id
+
+Ref: Comment.userId > User.id
+
+Ref: Comment.appId > App.id
+
+Ref: AppComponent.appId > App.id
+
+Ref: ComponentData.appComponentId - AppComponent.id

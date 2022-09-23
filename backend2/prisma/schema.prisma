@@ -12,29 +12,80 @@ generator dbml {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  email     String   @unique
+  id        String    @id @default(uuid())
+  firstName String
+  lastName  String
+  email     String    @unique
   password  String
-  firstname String?
-  lastname  String?
-  posts     Post[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   role      Role
-}
-
-model Post {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Boolean
-  title     String
-  content   String?
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  String?
+  App       App[]
+  Comment   Comment[]
 }
 
 enum Role {
   ADMIN
-  USER
+  DEVELOPER
+  OPERATOR
 }
+
+model App {
+  id            String         @id @default(uuid())
+  name          String         @unique
+  slug          String         @default(uuid())
+  isPublic      Boolean        @default(false)
+  dataDefintion Json?
+  user          User           @relation(fields: [userId], references: [id])
+  userId        String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  AppComponent  AppComponent[]
+  Comment       Comment[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  app       App      @relation(fields: [appId], references: [id])
+  appId     String
+}
+
+model AppComponent {
+  id            String         @id @default(uuid())
+  name          String         @unique
+  x             Int
+  y             Int
+  width         Int
+  height        Int
+  properties    Json?
+  app           App            @relation(fields: [appId], references: [id])
+  appId         String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  ComponentData ComponentData?
+}
+
+model ComponentData {
+  id             String       @id @default(uuid())
+  data           Json?
+  appComponent   AppComponent @relation(fields: [appComponentId], references: [id])
+  appComponentId String       @unique
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+// model DataQuery {
+//   id              String         @id @default(uuid())
+//   name            String         @unique
+//   kind            String
+//   options         Json?
+//   componentData   ComponentData? @relation(fields: [componentDataId], references: [id])
+//   componentDataId String?        @unique
+//   createdAt       DateTime       @default(now())
+//   updatedAt       DateTime       @updatedAt
+// }
