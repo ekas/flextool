@@ -1,30 +1,21 @@
-mutation Admin {
-  login(data: { email: "bart@simpson.com", password: "secret42" }) {
+mutation AdminRoleLogin {
+  login(data: { email: "john.doe@gmail.com", password: "secretJohn32" }) {
     ...AuthTokens
   }
 }
 
-mutation User {
-  login(data: { email: "lisa@simpson.com", password: "secret42" }) {
+mutation UserRoleLogin {
+  login(data: { email: "bile.simpson@gmail.com", password: "secretBile32" }) {
     ...AuthTokens
   }
 }
 
-mutation AuthUser {
-  signup(data: { email: "bart@simpson.com", password: "secret42" }) {
-    ...AuthTokens
+mutation NewRefreshToken {
+  refreshToken(
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiMTAwN2RlMi1mOGU2LTRmNmYtOWZhNC00OGExYzM5YmUwZDYiLCJpYXQiOjE2NjM5NTg2MDMsImV4cCI6MTY2NDU2MzQwM30.-gy4r4OwjUQZx_KHahXYmxh0tHbay8s6c2Fwoog4F5g"
+  ) {
+    refreshToken
   }
-}
-
-mutation RefreshToken {
-  refreshToken(token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja3lqdDZrdmkwMDIxcHdldmM0OW8zYTAyIiwiaWF0IjoxNjQ0ODMyNzYyLCJleHAiOjE2NDU0Mzc1NjJ9.eSD3zIsVBNS1pTRtYjjYrCWUYBcUL5ZeCpPTDXEc68Y") {
-    ...TokenData
-  }
-}
-
-fragment UserData on User {
-  id
-  email
 }
 
 fragment AuthTokens on Auth {
@@ -35,7 +26,8 @@ fragment AuthTokens on Auth {
   }
 }
 
-fragment TokenData on Token {
-  accessToken
-  refreshToken
+fragment UserData on User {
+  id
+  email
+  role
 }
