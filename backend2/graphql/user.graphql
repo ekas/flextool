@@ -24,6 +24,14 @@ mutation ChangePassword {
   }
 }
 
+mutation ChangeRole {
+  changeRole(
+    data: { email: "ekaspreet93.singh@gmail.com", role: "DEVELOPER" }
+  ) {
+    ...UserData
+  }
+}
+
 fragment UserData on User {
   id
   email

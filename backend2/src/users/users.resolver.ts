@@ -14,6 +14,7 @@ import { UsersService } from './users.service';
 import { User } from './models/user.model';
 import { ChangePasswordInput } from './dto/change-password.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { ChangeRoleInput } from './dto/change-role.input';
 
 @Resolver(() => User)
 @UseGuards(GqlAuthGuard)
@@ -48,6 +49,15 @@ export class UsersResolver {
       user.password,
       changePassword
     );
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => User)
+  async changeRole(
+    @UserEntity() user: User,
+    @Args('data') changeRoleInput: ChangeRoleInput
+  ) {
+    return this.usersService.changeRole(user.id, changeRoleInput);
   }
 
   // @ResolveField('posts')

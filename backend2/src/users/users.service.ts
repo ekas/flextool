@@ -3,6 +3,7 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 import { PasswordService } from 'src/auth/password.service';
 import { ChangePasswordInput } from './dto/change-password.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { ChangeRoleInput } from './dto/change-role.input';
 
 @Injectable()
 export class UsersService {
@@ -43,6 +44,22 @@ export class UsersService {
         password: hashedPassword,
       },
       where: { id: userId },
+    });
+  }
+
+  async changeRole(userId: string, changeRole: ChangeRoleInput) {
+    const getUser = await this.prisma.user.findUnique({
+      where: { id: userId },
+    });
+    if (getUser.role !== 'ADMIN') {
+      throw new BadRequestException('Not authorized to change role');
+    }
+
+    return this.prisma.user.update({
+      data: {
+        role: changeRole.role,
+      },
+      where: { email: changeRole.email },
     });
   }
 }
