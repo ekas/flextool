@@ -14,12 +14,14 @@ import { RefreshTokenInput } from './dto/refresh-token.input';
 
 @Resolver(() => Auth)
 export class AuthResolver {
-  constructor(private readonly auth: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => Auth)
   async signup(@Args('data') data: SignupInput) {
     data.email = data.email.toLowerCase();
-    const { accessToken, refreshToken } = await this.auth.createUser(data);
+    const { accessToken, refreshToken } = await this.authService.createUser(
+      data
+    );
     return {
       accessToken,
       refreshToken,
@@ -28,7 +30,7 @@ export class AuthResolver {
 
   @Mutation(() => Auth)
   async login(@Args('data') { email, password }: LoginInput) {
-    const { accessToken, refreshToken } = await this.auth.login(
+    const { accessToken, refreshToken } = await this.authService.login(
       email.toLowerCase(),
       password
     );
@@ -41,11 +43,11 @@ export class AuthResolver {
 
   @Mutation(() => Token)
   async refreshToken(@Args() { token }: RefreshTokenInput) {
-    return this.auth.refreshToken(token);
+    return this.authService.refreshToken(token);
   }
 
   @ResolveField('user')
   async user(@Parent() auth: Auth) {
-    return await this.auth.getUserFromToken(auth.accessToken);
+    return await this.authService.getUserFromToken(auth.accessToken);
   }
 }

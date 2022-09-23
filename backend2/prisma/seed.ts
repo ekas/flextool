@@ -146,7 +146,7 @@ async function main() {
       email: 'ekaspreet93.singh@gmail.com',
       firstName: 'Ekas Preet',
       lastName: 'Singh',
-      password: '$2a$10$AX1KUby95KVvgWsgFXrj7e33Pct4yjqrzNwNTO2Yh8eXbrWR6eutO', // secretEkas42
+      password: '$2a$10$AX1KUby95KVvgWsgFXrj7e33Pct4yjqrzNwNTO2Yh8eXbrWR6eutO', // secretEkas32
       role: 'OPERATOR',
     },
   });
