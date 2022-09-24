@@ -8,6 +8,7 @@ import { BaseModel } from 'src/common/models/base.model';
 import { Role } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
+import { App } from 'src/apps/models/app.model';
 
 registerEnumType(Role, {
   name: 'Role',
@@ -23,6 +24,9 @@ export class User extends BaseModel {
   role: Role;
   @HideField()
   password: string;
+
+  @Field(() => [App])
+  apps?: [App];
 }
 
 export class UserRest {

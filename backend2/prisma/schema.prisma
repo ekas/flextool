@@ -31,17 +31,17 @@ enum Role {
 }
 
 model App {
-  id            String         @id @default(uuid())
-  name          String         @unique
-  slug          String         @default(uuid())
-  isPublic      Boolean        @default(false)
-  dataDefintion Json?
-  user          User           @relation(fields: [userId], references: [id])
-  userId        String
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  AppComponent  AppComponent[]
-  Comment       Comment[]
+  id           String         @id @default(uuid())
+  name         String         @unique
+  slug         String         @default(uuid())
+  isPublic     Boolean        @default(false)
+  data         String         @db.VarChar(1000)
+  user         User           @relation(fields: [userId], references: [id])
+  userId       String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  AppComponent AppComponent[]
+  Comment      Comment[]
 }
 
 model Comment {
