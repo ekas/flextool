@@ -32,6 +32,9 @@ export class AuthLoginRest {
 
   @ApiProperty({ default: 'secretJohn32' })
   password: string;
+
+  @ApiProperty({ enum: ['ADMIN', 'DEVELOPER', 'OPERATOR'] })
+  role: Role;
 }
 
 export class AuthResponseRest {

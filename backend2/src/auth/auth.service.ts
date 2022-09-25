@@ -11,7 +11,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PasswordService } from './password.service';
 import { SignupInput } from './dto/signup.input';
-import { Token } from './models/token.model';
+import { Token, TokenWithRole } from './models/token.model';
 import { SecurityConfig } from 'src/common/configs/config.interface';
 
 @Injectable()
@@ -54,7 +54,7 @@ export class AuthService {
     }
   }
 
-  async login(email: string, password: string): Promise<Token> {
+  async login(email: string, password: string): Promise<TokenWithRole> {
     const user = await this.prisma.user.findUnique({ where: { email } });
 
     if (!user) {
@@ -70,9 +70,14 @@ export class AuthService {
       throw new BadRequestException('Invalid password');
     }
 
-    return this.generateTokens({
+    const tokens = this.generateTokens({
       userId: user.id,
     });
+
+    return {
+      ...tokens,
+      role: user.role,
+    };
   }
 
   validateUser(userId: string): Promise<User> {

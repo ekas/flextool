@@ -15,15 +15,7 @@ export class AuthController {
   @Post('login')
   @ApiBody({ type: AuthLoginRest })
   async login(@Body() req): Promise<AuthResponseRest> {
-    const { accessToken, refreshToken } = await this.authService.login(
-      req.email.toLowerCase(),
-      req.password
-    );
-
-    return {
-      accessToken,
-      refreshToken,
-    };
+    return await this.authService.login(req.email.toLowerCase(), req.password);
   }
 
   @Post('signup')

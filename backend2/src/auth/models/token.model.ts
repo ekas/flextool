@@ -9,3 +9,14 @@ export class Token {
   @Field(() => GraphQLJWT, { description: 'JWT refresh token' })
   refreshToken: string;
 }
+
+@ObjectType()
+export class TokenWithRole {
+  @Field(() => GraphQLJWT, { description: 'JWT access token' })
+  accessToken: string;
+
+  @Field(() => GraphQLJWT, { description: 'JWT refresh token' })
+  refreshToken: string;
+
+  role: string;
+}

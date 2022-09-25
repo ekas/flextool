@@ -22,6 +22,7 @@ fragment AuthTokens on Auth {
   accessToken
   refreshToken
   user {
+    role
     ...UserData
   }
 }
