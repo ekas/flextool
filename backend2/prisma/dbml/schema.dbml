@@ -20,7 +20,7 @@ Table App {
   name String [unique, not null]
   slug String [not null]
   isPublic Boolean [not null, default: false]
-  data String [not null]
+  data Json [not null]
   user User [not null]
   userId String [not null]
   createdAt DateTime [default: `now()`, not null]

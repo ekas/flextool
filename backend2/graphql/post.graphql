@@ -1,7 +1,18 @@
-query UserPosts {
-  userPosts(userId: "USER_ID") {
-    ...PostData
+query userApps {
+  userApps {
+    ...AppData
   }
+}
+
+fragment AppData on App {
+  id
+  name
+  isPublic
+  slug
+  createdAt
+  updatedAt
+  data
+  userId
 }
 
 query PublishedPostsConnection {

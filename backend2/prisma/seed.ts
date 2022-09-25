@@ -26,7 +26,7 @@ async function main() {
       name: 'App1',
       isPublic: true,
       slug: 'app1',
-      data: '{name: "Ekas1"}',
+      data: { name: 'Ekas1' },
       user: {
         connect: {
           id: user1.id,
@@ -92,7 +92,7 @@ async function main() {
       name: 'App2',
       isPublic: true,
       slug: 'app2',
-      data: '{name: "Ekas2"}',
+      data: { name: 'Ekas2' },
       user: {
         connect: {
           id: user2.id,
@@ -158,7 +158,7 @@ async function main() {
       name: 'App3',
       isPublic: true,
       slug: 'app3',
-      data: '{name: "Ekas3"}',
+      data: { name: 'Ekas3' },
       user: {
         connect: {
           id: user3.id,

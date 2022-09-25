@@ -5,7 +5,7 @@
 type App {
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
-  data: String!
+  data: JSONObject!
   id: ID!
   isPublic: Boolean!
   name: String!
@@ -13,6 +13,7 @@ type App {
 
   """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime!
+  userId: String!
 }
 
 type Auth {
@@ -38,6 +39,11 @@ input ChangeRoleInput {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
 
 """
 A field whose value is a JSON Web Token (JWT): https://jwt.io/introduction.
