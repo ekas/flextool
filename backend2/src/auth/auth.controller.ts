@@ -1,15 +1,20 @@
-import { Body, Controller, Get, Param, Post, Request } from '@nestjs/common';
-import { ApiBody } from '@nestjs/swagger';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { Auth } from './models/auth.model';
+import {
+  AuthLoginRest,
+  AuthResponseRest,
+  AuthSignupRest,
+} from './models/auth.model';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  @ApiBody({ type: Auth })
-  async login(@Body() req) {
+  @ApiBody({ type: AuthLoginRest })
+  async login(@Body() req): Promise<AuthResponseRest> {
     const { accessToken, refreshToken } = await this.authService.login(
       req.email.toLowerCase(),
       req.password
@@ -22,8 +27,8 @@ export class AuthController {
   }
 
   @Post('signup')
-  @ApiBody({ type: Auth })
-  async signup(@Body() req) {
+  @ApiBody({ type: AuthSignupRest })
+  async signup(@Body() req): Promise<AuthResponseRest> {
     req.email = req.email.toLowerCase();
     const { accessToken, refreshToken } = await this.authService.createUser(
       req

@@ -35,6 +35,16 @@ async function bootstrap() {
       .setTitle(swaggerConfig.title || 'Nestjs')
       .setDescription(swaggerConfig.description || 'The nestjs API description')
       .setVersion(swaggerConfig.version || '1.0')
+      .addBearerAuth(
+        {
+          description: 'Default JWT Authorization',
+          type: 'http',
+          in: 'header',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+        'defaultBearerAuth'
+      )
       .build();
     const document = SwaggerModule.createDocument(app, options);
 

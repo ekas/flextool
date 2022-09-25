@@ -24,9 +24,6 @@ export class User extends BaseModel {
   role: Role;
   @HideField()
   password: string;
-
-  @Field(() => [App])
-  apps?: [App];
 }
 
 export class UserRest {
