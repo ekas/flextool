@@ -29,6 +29,11 @@ export class UsersResolver {
     return user;
   }
 
+  @Query(() => [User])
+  async usersForCMS(@UserEntity() user: User): Promise<User[]> {
+    return this.usersService.getAllUsers(user.id);
+  }
+
   @UseGuards(GqlAuthGuard)
   @Mutation(() => User)
   async updateUser(

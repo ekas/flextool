@@ -26,6 +26,7 @@ export class User extends BaseModel {
 }
 
 export class UserRest {
+  @ApiProperty({ default: '1' })
   id: string;
 
   @ApiProperty({ default: 'Alan' })
@@ -42,4 +43,10 @@ export class UserRest {
 
   @Exclude()
   password: string;
+
+  @ApiProperty({ default: '2021-01-01T00:00:00.000Z' })
+  createdAt: Date;
+
+  @ApiProperty({ default: '2021-01-01T00:00:00.000Z' })
+  updatedAt: Date;
 }

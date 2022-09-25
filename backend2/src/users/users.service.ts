@@ -12,6 +12,25 @@ export class UsersService {
     private passwordService: PasswordService
   ) {}
 
+  async getAllUsers(userId: string) {
+    const getUser = await this.prisma.user.findUnique({
+      where: { id: userId },
+    });
+    if (getUser.role !== 'ADMIN') {
+      throw new BadRequestException('Not authorized to get users');
+    }
+    return await this.prisma.user.findMany({
+      where: {
+        NOT: {
+          role: 'ADMIN',
+        },
+      },
+      orderBy: {
+        firstName: 'asc',
+      },
+    });
+  }
+
   updateUser(userId: string, newUserData: UpdateUserInput) {
     return this.prisma.user.update({
       data: newUserData,

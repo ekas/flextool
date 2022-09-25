@@ -85,6 +85,7 @@ type Query {
   me: User!
   userPageWithComponentData(pageId: String!): Page!
   userPages: [Page!]!
+  usersForCMS: [User!]!
 }
 
 """User role"""

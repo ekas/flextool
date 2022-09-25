@@ -10,11 +10,17 @@ import { UsersService } from './users.service';
 @Controller('user')
 @UseGuards(JwtAuthGuard)
 export class UserController {
-  constructor(private readonly userService: UsersService) {}
+  constructor(private readonly usersService: UsersService) {}
 
   @Get('me')
   @UseGuards(JwtAuthGuard)
   async me(@UserEntityRest() user: UserRest): Promise<UserRest> {
     return user;
+  }
+
+  @Get('all')
+  @UseGuards(JwtAuthGuard)
+  async usersForCMS(@UserEntityRest() user: UserRest): Promise<UserRest[]> {
+    return this.usersService.getAllUsers(user.id);
   }
 }
