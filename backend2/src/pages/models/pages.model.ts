@@ -1,7 +1,8 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { ArgsType, Field, ObjectType } from '@nestjs/graphql';
 import { BaseModel } from 'src/common/models/base.model';
 import { GraphQLJSONObject } from 'graphql-type-json';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 
 @ObjectType()
 export class Page extends BaseModel {
@@ -15,9 +16,38 @@ export class Page extends BaseModel {
   isPublic?: boolean;
 
   @ApiProperty({ default: { foo: 'bar' } })
-  @Field(() => GraphQLJSONObject)
-  definition?: JSON;
+  definition?: string;
 
   @ApiProperty({ default: '1' })
   userId?: string;
+}
+
+@ArgsType()
+export class PageArgs extends BaseModel {
+  @IsNotEmpty()
+  name: string;
+
+  @IsNotEmpty()
+  slug?: string;
+
+  @IsNotEmpty()
+  isPublic?: boolean;
+
+  @IsNotEmpty()
+  definition?: string;
+}
+
+@ArgsType()
+export class PageEditArgs extends BaseModel {
+  @IsNotEmpty()
+  id: string;
+
+  @IsNotEmpty()
+  name: string;
+
+  @IsNotEmpty()
+  isPublic?: boolean;
+
+  @IsNotEmpty()
+  definition?: string;
 }

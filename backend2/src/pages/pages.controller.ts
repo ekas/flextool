@@ -1,9 +1,12 @@
 import {
   Body,
+  ConflictException,
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
+  Patch,
   Post,
   UseGuards,
 } from '@nestjs/common';
@@ -26,7 +29,7 @@ export class PagesController {
   @UseGuards(JwtAuthGuard)
   @ApiResponse({ type: [Page] })
   async userApps(@UserEntityRest() user: User) {
-    return this.prisma.user.findUnique({ where: { id: user.id } }).page();
+    return await this.prisma.user.findUnique({ where: { id: user.id } }).page();
   }
 
   @Get(':pageId')
@@ -36,13 +39,51 @@ export class PagesController {
     @UserEntityRest() user: User,
     @Param('pageId') pageId: string
   ) {
-    return this.prisma.page.findUnique({
+    return await this.prisma.page.findUnique({
       where: { id: pageId },
     });
   }
 
+  @Post()
+  @UseGuards(JwtAuthGuard)
+  @ApiResponse({ type: Page })
+  async createPage(@UserEntityRest() user: User, @Body() page: Page) {
+    const findPageWithSameName = await this.prisma.page.findUnique({
+      where: { name: page.name },
+    });
+    if (findPageWithSameName)
+      throw new ConflictException(`Page with name ${page.name.trim()} exist`);
+    return await this.prisma.page.create({
+      data: {
+        name: page.name,
+        user: { connect: { id: user.id } },
+        isPublic: page.isPublic,
+        slug: page.slug,
+        definition: page.definition,
+      },
+    });
+    return findPageWithSameName;
+  }
+
+  @Patch()
+  @UseGuards(JwtAuthGuard)
+  @ApiResponse({ type: Page })
+  async editPage(@Body() page: Page) {
+    const getPage = await this.prisma.page.update({
+      where: { id: page.id },
+      data: {
+        name: page.name,
+        isPublic: page.isPublic,
+        definition: page.definition,
+      },
+    });
+    if (!getPage) throw new NotFoundException(`Page not Found`);
+    return getPage;
+  }
+
   @Delete(':pageId')
   @UseGuards(JwtAuthGuard)
+  @ApiResponse({ type: Page })
   async deletePage(
     @UserEntityRest() user: User,
     @Param('pageId') pageId: string
@@ -50,7 +91,7 @@ export class PagesController {
     await this.prisma.comment.deleteMany({
       where: { pageId: pageId },
     });
-    return this.prisma.page.delete({
+    return await this.prisma.page.delete({
       where: { id: pageId },
     });
   }

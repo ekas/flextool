@@ -9,6 +9,28 @@ query userPageWithComponentData {
   }
 }
 
+mutation createPageMutation {
+  createPage(
+    name: "App6"
+    slug: "app6"
+    definition: "{ name: 'Ekas6' }"
+    isPublic: true
+  ) {
+    ...PageData
+  }
+}
+
+mutation editPageMutation {
+  editPage(
+    id: "75d7ddf6-f9ea-4c8e-b626-8647dce45adb"
+    name: "App6"
+    definition: "{ name: 'Ekas6Preet Singh' }"
+    isPublic: true
+  ) {
+    ...PageData
+  }
+}
+
 mutation deletPage($id: String = "587fc3a3-048a-4259-ad38-658b59a48c3d") {
   deletePage(pageId: $id) {
     ...PageData

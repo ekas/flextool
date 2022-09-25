@@ -35,7 +35,7 @@ model Page {
   name       String    @unique
   slug       String    @default(uuid())
   isPublic   Boolean   @default(false)
-  definition Json
+  definition String    @db.VarChar(10000)
   user       User      @relation(fields: [userId], references: [id])
   userId     String
   createdAt  DateTime  @default(now())

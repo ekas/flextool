@@ -27,11 +27,6 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 """
-The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
-"""
-scalar JSONObject
-
-"""
 A field whose value is a JSON Web Token (JWT): https://jwt.io/introduction.
 """
 scalar JWT
@@ -44,7 +39,9 @@ input LoginInput {
 type Mutation {
   changePassword(data: ChangePasswordInput!): User!
   changeRole(data: ChangeRoleInput!): User!
+  createPage(definition: String, isPublic: Boolean, name: String!, slug: String): Page!
   deletePage(pageId: String!): Page!
+  editPage(definition: String, id: String!, isPublic: Boolean, name: String!): Page!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
   signup(data: SignupInput!): Auth!
@@ -54,7 +51,7 @@ type Mutation {
 type Page {
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
-  definition: JSONObject
+  definition: String
   id: ID!
   isPublic: Boolean
   name: String!
