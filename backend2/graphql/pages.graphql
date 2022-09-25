@@ -1,0 +1,27 @@
+query userPages {
+  userPages {
+    ...PageData
+  }
+}
+query userPageWithComponentData {
+  userPageWithComponentData(pageId: "ea986894-2714-4935-ae8a-6f07b49d93c1") {
+    ...PageData
+  }
+}
+
+mutation deletPage($id: String = "587fc3a3-048a-4259-ad38-658b59a48c3d") {
+  deletePage(pageId: $id) {
+    ...PageData
+  }
+}
+
+fragment PageData on Page {
+  id
+  name
+  isPublic
+  slug
+  createdAt
+  updatedAt
+  definition
+  userId
+}

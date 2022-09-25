@@ -20,7 +20,7 @@ Table Page {
   name String [unique, not null]
   slug String [not null]
   isPublic Boolean [not null, default: false]
-  data Json [not null]
+  definition Json [not null]
   user User [not null]
   userId String [not null]
   createdAt DateTime [default: `now()`, not null]

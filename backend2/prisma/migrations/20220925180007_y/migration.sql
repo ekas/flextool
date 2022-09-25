@@ -21,7 +21,7 @@ CREATE TABLE "Page" (
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "isPublic" BOOLEAN NOT NULL DEFAULT false,
-    "data" JSONB NOT NULL,
+    "definition" JSONB NOT NULL,
     "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

@@ -16,7 +16,7 @@ export class Page extends BaseModel {
 
   @ApiProperty({ default: { foo: 'bar' } })
   @Field(() => GraphQLJSONObject)
-  data?: JSON;
+  definition?: JSON;
 
   @ApiProperty({ default: '1' })
   userId?: string;

@@ -1,5 +1,5 @@
 import { PrismaService } from 'nestjs-prisma';
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/auth/gql-auth.guard';
 import { UserEntity } from 'src/common/decorators/user.decorator';
@@ -19,13 +19,24 @@ export class PagesResolver {
   }
 
   @UseGuards(GqlAuthGuard)
-  @Query(() => [Page])
+  @Query(() => Page)
   async userPageWithComponentData(
     @UserEntity() user: User,
     @Args() id: PageIdInput
   ) {
-    return this.prisma.page.findMany({
-      where: { id: id.pageId, userId: user.id },
+    return this.prisma.page.findUnique({
+      where: { id: id.pageId },
+    });
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => Page)
+  async deletePage(@UserEntity() user: User, @Args() pageId: PageIdInput) {
+    await this.prisma.comment.deleteMany({
+      where: { pageId: pageId.pageId },
+    });
+    return await this.prisma.page.delete({
+      where: { id: pageId.pageId },
     });
   }
 }

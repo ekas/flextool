@@ -44,6 +44,7 @@ input LoginInput {
 type Mutation {
   changePassword(data: ChangePasswordInput!): User!
   changeRole(data: ChangeRoleInput!): User!
+  deletePage(pageId: String!): Page!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
   signup(data: SignupInput!): Auth!
@@ -53,7 +54,7 @@ type Mutation {
 type Page {
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
-  data: JSONObject
+  definition: JSONObject
   id: ID!
   isPublic: Boolean
   name: String!
@@ -68,7 +69,7 @@ type Query {
   hello(name: String!): String!
   helloWorld: String!
   me: User!
-  userPageWithComponentData(pageId: String!): [Page!]!
+  userPageWithComponentData(pageId: String!): Page!
   userPages: [Page!]!
 }
 
