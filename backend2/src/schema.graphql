@@ -21,6 +21,18 @@ input ChangeRoleInput {
   role: String!
 }
 
+type Comment {
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  id: ID!
+  pageId: String!
+  text: String!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime!
+  userId: String!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -37,10 +49,13 @@ input LoginInput {
 }
 
 type Mutation {
+  addComment(pageId: String!, text: String!): Comment!
   changePassword(data: ChangePasswordInput!): User!
   changeRole(data: ChangeRoleInput!): User!
   createPage(definition: String, isPublic: Boolean, name: String!, slug: String): Page!
+  deleteComment(id: String!): Comment!
   deletePage(pageId: String!): Page!
+  editComment(id: String!, text: String!): Comment!
   editPage(definition: String, id: String!, isPublic: Boolean, name: String!): Page!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
@@ -63,6 +78,8 @@ type Page {
 }
 
 type Query {
+  getPageComments(pageId: String!): [Comment!]!
+  getUserComments: [Comment!]!
   hello(name: String!): String!
   helloWorld: String!
   me: User!

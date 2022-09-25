@@ -1,0 +1,38 @@
+query getUserComments {
+  getUserComments {
+    ...CommentsData
+  }
+}
+
+query getPageComments {
+  getPageComments(pageId: "a5847cab-d52c-41e4-91fb-a5277be3370") {
+    ...CommentsData
+  }
+}
+
+mutation addComment {
+  addComment(pageId: "a5847cab-d52c-41e4-91fb-a5277be3370", text: "Ekas") {
+    ...CommentsData
+  }
+}
+
+mutation editComment {
+  editComment(id: "10f0e527-baa1-4c6f-8039-559b58bbc6e3", text: "Ekas Preet") {
+    ...CommentsData
+  }
+}
+
+mutation deleteComment {
+  deleteComment(id: "10f0e527-baa1-4c6f-8039-559b58bbc6e3") {
+    ...CommentsData
+  }
+}
+
+fragment CommentsData on Comment {
+  id
+  text
+  createdAt
+  updatedAt
+  pageId
+  userId
+}
