@@ -4,7 +4,7 @@ import { PrismaService } from 'nestjs-prisma';
 import { JwtAuthGuard } from 'src/auth/rest-auth.guard';
 import { UserEntityRest } from 'src/common/decorators/user.decorator';
 import { User } from 'src/users/models/user.model';
-import { App } from './models/app.model';
+import { App } from './models/apps.model';
 
 @ApiTags('apps')
 @ApiBearerAuth()

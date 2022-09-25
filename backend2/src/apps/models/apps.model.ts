@@ -2,6 +2,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { BaseModel } from 'src/common/models/base.model';
 import { GraphQLJSONObject } from 'graphql-type-json';
 import { ApiProperty } from '@nestjs/swagger';
+import { AppComponent } from 'src/apps_component/models/apps_component.model';
 
 @ObjectType()
 export class App extends BaseModel {
@@ -9,15 +10,17 @@ export class App extends BaseModel {
   name: string;
 
   @ApiProperty({ default: 'my-app' })
-  slug: string;
+  slug?: string;
 
   @ApiProperty({ default: true })
-  isPublic: boolean;
+  isPublic?: boolean;
 
   @ApiProperty({ default: { foo: 'bar' } })
   @Field(() => GraphQLJSONObject)
-  data: JSON;
+  data?: JSON;
 
   @ApiProperty({ default: '1' })
-  userId: string;
+  userId?: string;
+
+  appComponent?: AppComponent;
 }
