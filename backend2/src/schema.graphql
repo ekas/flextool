@@ -2,20 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type App {
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-  data: JSONObject!
-  id: ID!
-  isPublic: Boolean!
-  name: String!
-  slug: String!
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime!
-  userId: String!
-}
-
 type Auth {
   """JWT access token"""
   accessToken: JWT!
@@ -64,11 +50,26 @@ type Mutation {
   updateUser(data: UpdateUserInput!): User!
 }
 
+type Page {
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  data: JSONObject
+  id: ID!
+  isPublic: Boolean
+  name: String!
+  slug: String
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime!
+  userId: String
+}
+
 type Query {
   hello(name: String!): String!
   helloWorld: String!
   me: User!
-  userApps: [App!]!
+  userPageWithComponentData(pageId: String!): [Page!]!
+  userPages: [Page!]!
 }
 
 """User role"""

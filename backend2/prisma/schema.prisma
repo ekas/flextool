@@ -20,8 +20,8 @@ model User {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   role      Role
-  App       App[]
-  Comment   Comment[]
+  page      Page[]
+  comment   Comment[]
 }
 
 enum Role {
@@ -30,18 +30,17 @@ enum Role {
   OPERATOR
 }
 
-model App {
-  id           String         @id @default(uuid())
-  name         String         @unique
-  slug         String         @default(uuid())
-  isPublic     Boolean        @default(false)
-  data         Json
-  user         User           @relation(fields: [userId], references: [id])
-  userId       String
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  AppComponent AppComponent[]
-  Comment      Comment[]
+model Page {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  slug      String    @default(uuid())
+  isPublic  Boolean   @default(false)
+  data      Json
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  comment   Comment[]
 }
 
 model Comment {
@@ -51,33 +50,33 @@ model Comment {
   updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  app       App      @relation(fields: [appId], references: [id])
-  appId     String
+  page      Page     @relation(fields: [pageId], references: [id])
+  pageId    String
 }
 
-model AppComponent {
-  id            String         @id @default(uuid())
-  name          String         @unique
-  x             Int
-  y             Int
-  width         Int
-  height        Int
-  properties    Json?
-  app           App            @relation(fields: [appId], references: [id])
-  appId         String
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  ComponentData ComponentData?
-}
+// model AppComponent {
+//   id            String         @id @default(uuid())
+//   name          String         @unique
+//   x             Int
+//   y             Int
+//   width         Int
+//   height        Int
+//   properties    Json?
+//   app           App            @relation(fields: [appId], references: [id])
+//   appId         String
+//   createdAt     DateTime       @default(now())
+//   updatedAt     DateTime       @updatedAt
+//   ComponentData ComponentData?
+// }
 
-model ComponentData {
-  id             String       @id @default(uuid())
-  data           Json?
-  appComponent   AppComponent @relation(fields: [appComponentId], references: [id])
-  appComponentId String       @unique
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-}
+// model ComponentData {
+//   id             String       @id @default(uuid())
+//   data           Json?
+//   appComponent   AppComponent @relation(fields: [appComponentId], references: [id])
+//   appComponentId String       @unique
+//   createdAt      DateTime     @default(now())
+//   updatedAt      DateTime     @updatedAt
+// }
 
 // model DataQuery {
 //   id              String         @id @default(uuid())

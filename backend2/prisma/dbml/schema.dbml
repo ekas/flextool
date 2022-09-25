@@ -11,11 +11,11 @@ Table User {
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   role Role [not null]
-  App App [not null]
-  Comment Comment [not null]
+  page Page [not null]
+  comment Comment [not null]
 }
 
-Table App {
+Table Page {
   id String [pk]
   name String [unique, not null]
   slug String [not null]
@@ -25,8 +25,7 @@ Table App {
   userId String [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  AppComponent AppComponent [not null]
-  Comment Comment [not null]
+  comment Comment [not null]
 }
 
 Table Comment {
@@ -36,32 +35,8 @@ Table Comment {
   updatedAt DateTime [not null]
   user User [not null]
   userId String [not null]
-  app App [not null]
-  appId String [not null]
-}
-
-Table AppComponent {
-  id String [pk]
-  name String [unique, not null]
-  x Int [not null]
-  y Int [not null]
-  width Int [not null]
-  height Int [not null]
-  properties Json
-  app App [not null]
-  appId String [not null]
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
-  ComponentData ComponentData
-}
-
-Table ComponentData {
-  id String [pk]
-  data Json
-  appComponent AppComponent [not null]
-  appComponentId String [unique, not null]
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
+  page Page [not null]
+  pageId String [not null]
 }
 
 Enum Role {
@@ -70,12 +45,8 @@ Enum Role {
   OPERATOR
 }
 
-Ref: App.userId > User.id
+Ref: Page.userId > User.id
 
 Ref: Comment.userId > User.id
 
-Ref: Comment.appId > App.id
-
-Ref: AppComponent.appId > App.id
-
-Ref: ComponentData.appComponentId - AppComponent.id
+Ref: Comment.pageId > Page.id

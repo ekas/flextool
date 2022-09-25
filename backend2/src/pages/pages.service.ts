@@ -2,7 +2,7 @@ import { PrismaService } from 'nestjs-prisma';
 import { Injectable, BadRequestException } from '@nestjs/common';
 
 @Injectable()
-export class AppsService {
+export class PagesService {
   constructor(private prisma: PrismaService) {}
 
   // updateUser(userId: string, newUserData: UpdateUserInput) {
