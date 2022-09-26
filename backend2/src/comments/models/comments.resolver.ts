@@ -21,6 +21,7 @@ export class CommentsResolver {
   async getUserComments(@UserEntity() user: User) {
     return await this.prisma.comment.findMany({
       where: { userId: user.id },
+      include: { user: true },
     });
   }
 
@@ -32,6 +33,7 @@ export class CommentsResolver {
   ) {
     return await this.prisma.comment.findMany({
       where: { pageId: pageId },
+      include: { user: true },
     });
   }
 

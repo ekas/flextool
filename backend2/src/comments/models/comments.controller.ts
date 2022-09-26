@@ -29,6 +29,7 @@ export class CommentsController {
   async getUserComments(@UserEntityRest() user: User) {
     return await this.prisma.comment.findMany({
       where: { userId: user.id },
+      include: { user: true },
     });
   }
 
@@ -38,6 +39,7 @@ export class CommentsController {
   async getPageComments(@Param('pageId') pageId: string) {
     return await this.prisma.comment.findMany({
       where: { pageId: pageId },
+      include: { user: true },
     });
   }
 
