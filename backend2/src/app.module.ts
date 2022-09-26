@@ -12,7 +12,7 @@ import { loggingMiddleware } from 'src/common/middleware/logging.middleware';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GqlConfigService } from './gql-config.service';
 import { PagesModule } from './pages/pages.module';
-import { CommentsModule } from './comments/models/comments.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [

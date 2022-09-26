@@ -9,7 +9,7 @@ import {
   CommentAdd,
   CommentDelete,
   CommentEdit,
-} from './comment.model';
+} from './models/comment.model';
 
 @Resolver(() => Comment)
 @UseGuards(GqlAuthGuard)

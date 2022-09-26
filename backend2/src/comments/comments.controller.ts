@@ -14,7 +14,7 @@ import { PrismaService } from 'nestjs-prisma';
 import { JwtAuthGuard } from 'src/auth/rest-auth.guard';
 import { UserEntityRest } from 'src/common/decorators/user.decorator';
 import { User } from 'src/users/models/user.model';
-import { Comment, CommentEditRest, CommentRest } from './comment.model';
+import { Comment, CommentEditRest, CommentRest } from './models/comment.model';
 
 @ApiTags('comments')
 @ApiBearerAuth()
