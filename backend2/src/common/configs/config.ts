@@ -28,15 +28,15 @@ const config: Config = {
   // You can also use any other email sending services
   mail: {
     service: {
-      host: 'smtp.sendgrid.net',
+      host: '',
       port: 587,
       secure: false,
-      user: 'apikey',
-      pass: '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',
+      user: '',
+      pass: '',
     },
     senderCredentials: {
       name: 'Ekas Preet Singh',
-      email: 'ekas93.singh@gmail.com',
+      email: '',
     },
   },
   // these are used in the mail templates
