@@ -13,6 +13,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GqlConfigService } from './gql-config.service';
 import { PagesModule } from './pages/pages.module';
 import { CommentsModule } from './comments/comments.module';
+import { MailSenderModule } from './mail-sender/mail-sender.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { CommentsModule } from './comments/comments.module';
     UsersModule,
     PagesModule,
     CommentsModule,
+    MailSenderModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
