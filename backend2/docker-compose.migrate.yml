@@ -10,6 +10,19 @@ services:
     depends_on:
       - postgres
 
+  nest-api:
+    container_name: nest-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgres
+      - prisma-migrate
+    env_file:
+      - .env
+
   postgres:
     image: postgres:13
     container_name: postgres

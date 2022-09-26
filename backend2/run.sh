@@ -1,2 +1,2 @@
-docker build -t nest-prisma-server .
-docker run -d -t -p 3000:3000 nest-prisma-server
+docker build -t flextool-backend .
+docker run -d -t -p 5000:5000 --env-file .env flextool-backend
