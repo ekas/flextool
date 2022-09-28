@@ -28,15 +28,15 @@ const config: Config = {
   // You can also use any other email sending services
   mail: {
     service: {
-      host: '',
+      host: process.env.MAIL_SENDER_HOST,
       port: 587,
       secure: false,
-      user: '',
-      pass: '',
+      user: process.env.MAIL_SENDER_USER,
+      pass: process.env.MAIL_SENDER_PASS,
     },
     senderCredentials: {
-      name: 'Ekas Preet Singh',
-      email: '',
+      name: process.env.MAIL_SENDER_NAME,
+      email: process.env.MAIL_SENDER_EMAIL,
     },
   },
   // these are used in the mail templates
