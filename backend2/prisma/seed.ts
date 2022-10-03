@@ -24,7 +24,8 @@ async function main() {
       name: 'App1',
       isPublic: true,
       slug: 'app1',
-      definition: "{ name: 'Ekas1' }",
+      definition:
+        '{"component":{"name":"App1","x":0,"y":0,"width":100,"height":100,"data":{}}}',
       user: {
         connect: {
           id: user1.id,
@@ -32,32 +33,6 @@ async function main() {
       },
     },
   });
-
-  // const appComponent1 = await prisma.appComponent.create({
-  //   data: {
-  //     name: 'AppComponent1',
-  //     x: 0,
-  //     y: 0,
-  //     width: 100,
-  //     height: 100,
-  //     app: {
-  //       connect: {
-  //         id: app1.id,
-  //       },
-  //     },
-  //   },
-  // });
-
-  // const componentData1 = await prisma.componentData.create({
-  //   data: {
-  //     data: {},
-  //     appComponent: {
-  //       connect: {
-  //         id: appComponent1.id,
-  //       },
-  //     },
-  //   },
-  // });
 
   const comment1 = await prisma.comment.create({
     data: {
@@ -90,7 +65,8 @@ async function main() {
       name: 'App2',
       isPublic: true,
       slug: 'app2',
-      definition: "{ name: 'Ekas2' }",
+      definition:
+        '{"component":{"name":"App2","x":0,"y":0,"width":100,"height":100,"data":{}}}',
       user: {
         connect: {
           id: user2.id,
@@ -98,32 +74,6 @@ async function main() {
       },
     },
   });
-
-  // const appComponent2 = await prisma.appComponent.create({
-  //   data: {
-  //     name: 'AppComponent2',
-  //     x: 0,
-  //     y: 0,
-  //     width: 100,
-  //     height: 100,
-  //     app: {
-  //       connect: {
-  //         id: app2.id,
-  //       },
-  //     },
-  //   },
-  // });
-
-  // const componentData2 = await prisma.componentData.create({
-  //   data: {
-  //     data: {},
-  //     appComponent: {
-  //       connect: {
-  //         id: appComponent2.id,
-  //       },
-  //     },
-  //   },
-  // });
 
   const comment2 = await prisma.comment.create({
     data: {
@@ -156,7 +106,8 @@ async function main() {
       name: 'App3',
       isPublic: true,
       slug: 'app3',
-      definition: "{ name: 'Ekas3' }",
+      definition:
+        '{"component":{"name":"App3","x":0,"y":0,"width":100,"height":100,"data":{}}}',
       user: {
         connect: {
           id: user3.id,
@@ -164,32 +115,6 @@ async function main() {
       },
     },
   });
-
-  // const appComponent3 = await prisma.appComponent.create({
-  //   data: {
-  //     name: 'AppComponent3',
-  //     x: 0,
-  //     y: 0,
-  //     width: 100,
-  //     height: 100,
-  //     app: {
-  //       connect: {
-  //         id: app3.id,
-  //       },
-  //     },
-  //   },
-  // });
-
-  // const componentData3 = await prisma.componentData.create({
-  //   data: {
-  //     data: {},
-  //     appComponent: {
-  //       connect: {
-  //         id: appComponent3.id,
-  //       },
-  //     },
-  //   },
-  // });
 
   const comment3 = await prisma.comment.create({
     data: {

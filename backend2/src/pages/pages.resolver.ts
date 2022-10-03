@@ -69,7 +69,7 @@ export class PagesResolver {
 
   @UseGuards(GqlAuthGuard)
   @Mutation(() => Page)
-  async deletePage(@UserEntity() user: User, @Args() pageId: PageIdInput) {
+  async deletePage(@Args() pageId: PageIdInput) {
     await this.prisma.comment.deleteMany({
       where: { pageId: pageId.pageId },
     });

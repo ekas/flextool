@@ -28,7 +28,7 @@ export class PagesController {
   @Get()
   @UseGuards(JwtAuthGuard)
   @ApiResponse({ type: [Page] })
-  async userApps(@UserEntityRest() user: User) {
+  async userPages(@UserEntityRest() user: User) {
     return await this.prisma.user.findUnique({ where: { id: user.id } }).page();
   }
 
