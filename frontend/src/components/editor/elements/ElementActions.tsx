@@ -3,11 +3,11 @@ import { SettingOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import "./index.less";
 
-interface ElementActions {
-  name: string;
+interface ElementActionsProps {
+  name?: string;
 }
 
-const ElementActions: FC = () => {
+const ElementActions: FC<ElementActionsProps> = ({ name }) => {
   return (
     <div className="actionsHandle">
       <span className="actionsHeader">

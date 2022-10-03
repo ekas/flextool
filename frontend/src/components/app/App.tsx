@@ -3,7 +3,7 @@ import { LoginPage } from "components/login/LoginPage";
 import { LogupPage } from "components/logup/LogupPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AppsPages } from "components/apps/AppsPage";
-import PageLayout from "components/pageLayout/PageLayout";
+import Page from "components/Page";
 
 function App() {
   const data = Array.from({ length: 23 }).map((_, i) => ({
@@ -19,8 +19,8 @@ function App() {
             <Route path="" element={<LoginPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="logup" element={<LogupPage />} />
-            <Route path="apps" element={<AppsPages apps={data} />} />
-            <Route path="apps/:appId" element={<PageLayout />} />
+            <Route path="pages" element={<AppsPages apps={data} />} />
+            <Route path="pages/:pageId" element={<Page />} />
             <Route
               path="*"
               element={
