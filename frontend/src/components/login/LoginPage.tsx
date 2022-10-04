@@ -13,8 +13,8 @@ import logo from "../../assets/logo.svg";
 import { FC, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./index.less";
-import { useLazyQuery, useMutation } from "@apollo/client";
-import { USER_DATA_QUERY, USER_LOGIN } from "queries/auth.query";
+import { useMutation } from "@apollo/client";
+import { USER_LOGIN } from "queries/auth.query";
 import useLocalStorage from "hooks/useLocalStorage";
 import { toast } from "react-toastify";
 
@@ -34,15 +34,6 @@ export const LoginPage: FC<LoginProps> = () => {
     },
     onError: (error) => {
       toast.error(error.message);
-    },
-  });
-
-  const [userQuery] = useLazyQuery(USER_DATA_QUERY, {
-    onCompleted: (QueryData) => {
-      console.log(QueryData);
-    },
-    onError: (error) => {
-      console.log(error);
     },
   });
 

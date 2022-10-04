@@ -46,4 +46,9 @@ fragment PageData on Page {
   updatedAt
   definition
   userId
+  user {
+    role
+    firstName
+    email
+  }
 }

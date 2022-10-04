@@ -15,11 +15,6 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const pageList = Array.from({ length: 23 }).map((_, i) => ({
-    href: `${i}`,
-    title: `Onboarding Page ${i}`,
-    description: "Edited 2 months ago",
-  }));
   return (
     <Router>
       <div className="App">
@@ -32,7 +27,7 @@ function App() {
               path="pages"
               element={
                 <ProtectedRoutes>
-                  <PageList pages={pageList} />
+                  <PageList />
                 </ProtectedRoutes>
               }
             />

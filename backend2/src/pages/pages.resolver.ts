@@ -1,5 +1,12 @@
 import { PrismaService } from 'nestjs-prisma';
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Args,
+  Mutation,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import {
   ConflictException,
   NotFoundException,
@@ -19,7 +26,21 @@ export class PagesResolver {
   @UseGuards(GqlAuthGuard)
   @Query(() => [Page])
   async userPages(@UserEntity() user: User) {
-    return await this.prisma.user.findUnique({ where: { id: user.id } }).page();
+    if (user.role === 'ADMIN') {
+      return await this.prisma.page.findMany({
+        include: { user: true },
+      });
+    }
+    if (user.role === 'OPERATOR') {
+      return await this.prisma.page.findMany({
+        where: { isPublic: true },
+        include: { user: true },
+      });
+    }
+    return await this.prisma.page.findMany({
+      where: { userId: user.id },
+      include: { user: true },
+    });
   }
 
   @UseGuards(GqlAuthGuard)
@@ -75,6 +96,13 @@ export class PagesResolver {
     });
     return await this.prisma.page.delete({
       where: { id: pageId.pageId },
+    });
+  }
+
+  @ResolveField('user', () => User)
+  getPageUser(@Parent() userPageWithComponentData: Page) {
+    return this.prisma.user.findUnique({
+      where: { id: userPageWithComponentData.userId },
     });
   }
 }

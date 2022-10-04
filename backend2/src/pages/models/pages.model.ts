@@ -1,6 +1,5 @@
-import { ArgsType, Field, ObjectType } from '@nestjs/graphql';
+import { ArgsType, ObjectType } from '@nestjs/graphql';
 import { BaseModel } from 'src/common/models/base.model';
-import { GraphQLJSONObject } from 'graphql-type-json';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
