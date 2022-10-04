@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   Button,
   Checkbox,
@@ -17,20 +17,64 @@ import { Link } from "react-router-dom";
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
 import NavBarPage from "components/navbar/NavBarPage";
 
+import { useLazyQuery } from "@apollo/client";
+import { USER_DATA_QUERY } from "queries/auth.query";
+import { GET_PAGES } from "queries/page.query";
+import { toast } from "react-toastify";
+
 import "./index.less";
 
-interface PageListItem {
-  href: string;
-  title: string;
-  description: string;
+interface User {
+  id: string | null;
+  role: "DEVELOPER" | "ADMIN" | "OPERATOR" | null;
 }
 
-type PageListProps = {
-  pages: PageListItem[];
-};
+interface PageListItem {
+  createdAt: string;
+  definition: string;
+  id: string;
+  isPublic: boolean;
+  name: string;
+  slug: string;
+  updatedAt: string;
+  userId: string;
+  user: User;
+}
 
-export const PageList: FC<PageListProps> = ({ pages }) => {
+type PageListProps = {};
+
+export const PageList: FC<PageListProps> = () => {
   const { Search } = Input;
+  const [userData, setUserData] = useState<User>({
+    id: null,
+    role: null,
+  });
+  const [pages, setPages] = useState<PageListItem[] | undefined>(undefined);
+
+  const [userQuery] = useLazyQuery(USER_DATA_QUERY, {
+    onCompleted: (QueryData) => {
+      const { id, role } = QueryData.me;
+      setUserData({ id: id, role: role });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const [getPages] = useLazyQuery(GET_PAGES, {
+    onCompleted: (QueryData) => {
+      setPages(QueryData.userPages);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  useEffect(() => {
+    userQuery();
+    getPages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onSearch = (value: string) => console.log(value);
   const onChange = (e: CheckboxChangeEvent) => {
@@ -39,7 +83,7 @@ export const PageList: FC<PageListProps> = ({ pages }) => {
 
   return (
     <>
-      <NavBarPage type="apps" />
+      <NavBarPage type="pages" />
       <Row className="mainContainer" gutter={16}>
         <Col className="gutter-row leftCol" span={6}>
           <div className="">
@@ -60,13 +104,15 @@ export const PageList: FC<PageListProps> = ({ pages }) => {
                   onSearch={onSearch}
                   enterButton
                 />
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="creatNewBtn"
-                >
-                  Create New
-                </Button>
+                {userData.role === "DEVELOPER" && (
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="creatNewBtn"
+                  >
+                    Create New
+                  </Button>
+                )}
               </span>
             </div>
             <Divider plain className="appsDivider" />
@@ -83,26 +129,30 @@ export const PageList: FC<PageListProps> = ({ pages }) => {
               dataSource={pages}
               renderItem={(item) => (
                 <List.Item
-                  key={item.title}
+                  key={item.name}
                   actions={[
-                    <Dropdown
-                      overlay={appMenu}
-                      className="menuAvatar"
-                      arrow
-                      placement="bottomRight"
-                    >
-                      <a onClick={(e) => e.preventDefault()}>
-                        <img src={popMenu} alt="Pop Menu" className="" />
-                      </a>
-                    </Dropdown>,
+                    item.user.role === "DEVELOPER" ? (
+                      <Dropdown
+                        overlay={appMenu}
+                        className="menuAvatar"
+                        arrow
+                        placement="bottomRight"
+                      >
+                        <a onClick={(e) => e.preventDefault()}>
+                          <img src={popMenu} alt="Pop Menu" className="" />
+                        </a>
+                      </Dropdown>
+                    ) : null,
                   ]}
                 >
                   <List.Item.Meta
                     avatar={
                       <img src={appAvatar} alt="App Avatar" className="" />
                     }
-                    title={<Link to={item.href}>{item.title}</Link>}
-                    description={item.description}
+                    title={<Link to={item.id}>{item.name}</Link>}
+                    description={`Last edited on ${new Date(
+                      item.updatedAt
+                    ).toDateString()}`}
                   />
                 </List.Item>
               )}

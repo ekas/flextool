@@ -14,23 +14,26 @@ import { Link, useNavigate } from "react-router-dom";
 import "./index.less";
 
 interface NavBarPageProps {
-  type: "apps" | "page";
+  type: "pages" | "page";
 }
 
 const NavBarPage: FC<NavBarPageProps> = ({ type }) => {
   const navigate = useNavigate();
   return (
     <>
-      {type === "apps" ? (
+      {type === "pages" ? (
         <div className="navBarContainer">
           <Menu
             mode="horizontal"
-            defaultSelectedKeys={["apps"]}
+            defaultSelectedKeys={["pages"]}
             className="menuContainer"
           >
             <img src={logo} alt="Logo" className="appLogo" />
-            <Menu.Item key="apps" icon={<img src={appsIcon} alt="Apps Menu" />}>
-              Apps
+            <Menu.Item
+              key="pages"
+              icon={<img src={appsIcon} alt="Pages Menu" />}
+            >
+              Pages
             </Menu.Item>
             <Menu.Item
               key="datasource"
@@ -113,7 +116,11 @@ const userMenu = (
       {
         key: "2",
         danger: true,
-        label: <Link to="/">Logout</Link>,
+        label: <>Logout</>,
+        onClick: () => {
+          localStorage.removeItem("auth");
+          window.location.href = "/";
+        },
       },
     ]}
   />
