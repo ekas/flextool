@@ -6,7 +6,7 @@ import { AppsPages } from "components/apps/AppsPage";
 import Page from "components/Page";
 
 function App() {
-  const data = Array.from({ length: 23 }).map((_, i) => ({
+  const pageList = Array.from({ length: 23 }).map((_, i) => ({
     href: `${i}`,
     title: `Onboarding Page ${i}`,
     description: "Edited 2 months ago",
@@ -19,7 +19,7 @@ function App() {
             <Route path="" element={<LoginPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="logup" element={<LogupPage />} />
-            <Route path="pages" element={<AppsPages apps={data} />} />
+            <Route path="pages" element={<AppsPages apps={pageList} />} />
             <Route path="pages/:pageId" element={<Page />} />
             <Route
               path="*"
