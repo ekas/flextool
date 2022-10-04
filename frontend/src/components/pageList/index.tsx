@@ -19,17 +19,17 @@ import NavBarPage from "components/navbar/NavBarPage";
 
 import "./index.less";
 
-interface App {
+interface PageListItem {
   href: string;
   title: string;
   description: string;
 }
 
-type AppsPageProps = {
-  apps: App[];
+type PageListProps = {
+  pages: PageListItem[];
 };
 
-export const AppsPages: FC<AppsPageProps> = ({ apps }) => {
+export const PageList: FC<PageListProps> = ({ pages }) => {
   const { Search } = Input;
 
   const onSearch = (value: string) => console.log(value);
@@ -80,7 +80,7 @@ export const AppsPages: FC<AppsPageProps> = ({ apps }) => {
                 },
                 pageSize: 5,
               }}
-              dataSource={apps}
+              dataSource={pages}
               renderItem={(item) => (
                 <List.Item
                   key={item.title}

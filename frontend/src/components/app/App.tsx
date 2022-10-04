@@ -1,16 +1,16 @@
 import "./App.less";
 import { LoginPage } from "components/login/LoginPage";
 import { LogupPage } from "components/logup/LogupPage";
+import { ToastContainer } from "react-toastify";
+import useLocalStorage from "hooks/useLocalStorage";
+import { PageList } from "components/pageList";
+import Page from "components/page";
 import {
   BrowserRouter as Router,
   Navigate,
   Route,
   Routes,
 } from "react-router-dom";
-import { AppsPages } from "components/apps/AppsPage";
-import Page from "components/Page";
-import { ToastContainer } from "react-toastify";
-import useLocalStorage from "hooks/useLocalStorage";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -32,7 +32,7 @@ function App() {
               path="pages"
               element={
                 <ProtectedRoutes>
-                  <AppsPages apps={pageList} />
+                  <PageList pages={pageList} />
                 </ProtectedRoutes>
               }
             />
