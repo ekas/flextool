@@ -1,16 +1,34 @@
 import { Button, Col, Form, Input, Row, Typography } from "antd";
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo.svg";
-import { FC } from "react";
+import { FC, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { USER_SIGNUP } from "queries/auth.query";
+import { toast } from "react-toastify";
+
 import "./index.less";
-import { Link } from "react-router-dom";
 
 type LogupProps = {};
 
 export const LogupPage: FC<LogupProps> = () => {
-  const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
-  };
+  const navigate = useNavigate();
+  const [data, setData] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+  });
+
+  const [userSignUp] = useMutation(USER_SIGNUP, {
+    onCompleted: (QueryData) => {
+      toast.success("Signed Up successfully! Please login to continue");
+      navigate("/login");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
 
   return (
     <>
@@ -32,7 +50,7 @@ export const LogupPage: FC<LogupProps> = () => {
               name="normal_login"
               className="logupForm"
               initialValues={{ remember: true }}
-              onFinish={onFinish}
+              onFinish={() => userSignUp({ variables: { ...data } })}
             >
               <Form.Item
                 className="logupFormItem"
@@ -45,6 +63,9 @@ export const LogupPage: FC<LogupProps> = () => {
                   prefix={<UserOutlined />}
                   type="text"
                   placeholder="First Name"
+                  onChange={(e) =>
+                    setData({ ...data, firstName: e.target.value })
+                  }
                 />
               </Form.Item>
               <Form.Item
@@ -58,6 +79,9 @@ export const LogupPage: FC<LogupProps> = () => {
                   prefix={<UserOutlined />}
                   type="text"
                   placeholder="Last Name"
+                  onChange={(e) =>
+                    setData({ ...data, lastName: e.target.value })
+                  }
                 />
               </Form.Item>
               <Form.Item
@@ -71,6 +95,7 @@ export const LogupPage: FC<LogupProps> = () => {
                   prefix={<MailOutlined />}
                   type="email"
                   placeholder="Email"
+                  onChange={(e) => setData({ ...data, email: e.target.value })}
                 />
               </Form.Item>
               <Form.Item
@@ -84,6 +109,9 @@ export const LogupPage: FC<LogupProps> = () => {
                   prefix={<LockOutlined />}
                   type="password"
                   placeholder="Password"
+                  onChange={(e) =>
+                    setData({ ...data, password: e.target.value })
+                  }
                 />
               </Form.Item>
               <Form.Item>
