@@ -10,16 +10,41 @@ import {
 } from "antd";
 import { LockOutlined, MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo.svg";
-import { FC } from "react";
-import { Link } from "react-router-dom";
+import { FC, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./index.less";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { USER_DATA_QUERY, USER_LOGIN } from "queries/auth.query";
+import useLocalStorage from "hooks/useLocalStorage";
+import { toast } from "react-toastify";
 
 type LoginProps = {};
 
 export const LoginPage: FC<LoginProps> = () => {
-  const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
-  };
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [, setAccessToken] = useLocalStorage<string | null>("auth", null);
+
+  const [userLogin] = useMutation(USER_LOGIN, {
+    onCompleted: (QueryData) => {
+      setAccessToken(QueryData.login.accessToken);
+      toast.success("Login successful");
+      navigate("/pages");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const [userQuery] = useLazyQuery(USER_DATA_QUERY, {
+    onCompleted: (QueryData) => {
+      console.log(QueryData);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   return (
     <>
@@ -50,7 +75,9 @@ export const LoginPage: FC<LoginProps> = () => {
               name="normal_login"
               className="loginForm"
               initialValues={{ remember: true }}
-              onFinish={onFinish}
+              onFinish={() =>
+                userLogin({ variables: { email: email, password: password } })
+              }
             >
               <Form.Item
                 className="loginFormItem"
@@ -63,6 +90,7 @@ export const LoginPage: FC<LoginProps> = () => {
                   prefix={<MailOutlined />}
                   type="email"
                   placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Item>
               <Form.Item
@@ -76,6 +104,7 @@ export const LoginPage: FC<LoginProps> = () => {
                   prefix={<LockOutlined />}
                   type="password"
                   placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Item>
               <div className="loginFormItemForget">

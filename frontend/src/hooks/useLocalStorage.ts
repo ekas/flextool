@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function useLocalStorage<T>(
   key: string,
-  initialValue: T,
+  initialValue?: T,
   isJSON: boolean = false
 ) {
   // State to store our value
@@ -15,7 +15,7 @@ function useLocalStorage<T>(
       // Get from local storage by key
       const item = window.localStorage.getItem(key);
       // Parse stored json or if none return initialValue
-      return isJSON && item ? JSON.parse(item) : initialValue;
+      return isJSON && item ? JSON.parse(item) : item;
     } catch (error) {
       // If error also return initialValue
       console.log(error);
