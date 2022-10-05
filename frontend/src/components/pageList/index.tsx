@@ -18,43 +18,25 @@ import { CheckboxChangeEvent } from "antd/lib/checkbox";
 import NavBarPage from "components/navbar/NavBarPage";
 
 import { useLazyQuery } from "@apollo/client";
-import { USER_DATA_QUERY } from "queries/auth.query";
 import { GET_PAGES } from "queries/page.query";
 import { toast } from "react-toastify";
 
+import { PageListItem } from "types/page.type";
+import { User } from "types/user.type";
+import { USER_DATA_QUERY } from "queries/user.query";
+
 import "./index.less";
-
-interface User {
-  id: string | null;
-  role: "DEVELOPER" | "ADMIN" | "OPERATOR" | null;
-}
-
-interface PageListItem {
-  createdAt: string;
-  definition: string;
-  id: string;
-  isPublic: boolean;
-  name: string;
-  slug: string;
-  updatedAt: string;
-  userId: string;
-  user: User;
-}
 
 type PageListProps = {};
 
 export const PageList: FC<PageListProps> = () => {
   const { Search } = Input;
-  const [userData, setUserData] = useState<User>({
-    id: null,
-    role: null,
-  });
+  const [userData, setUserData] = useState<User | undefined>(undefined);
   const [pages, setPages] = useState<PageListItem[] | undefined>(undefined);
 
   const [userQuery] = useLazyQuery(USER_DATA_QUERY, {
     onCompleted: (QueryData) => {
-      const { id, role } = QueryData.me;
-      setUserData({ id: id, role: role });
+      setUserData({ ...QueryData.me });
     },
     onError: (error) => {
       toast.error(error.message);
@@ -76,6 +58,18 @@ export const PageList: FC<PageListProps> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const pageDelete = (page: PageListItem) => {
+    console.log("menu pageDelete", page);
+  };
+
+  const pageRename = (page: PageListItem) => {
+    console.log("menu pageRename", page);
+  };
+
+  const createNewPage = (pageName: string) => {
+    console.log("menu page create", pageName);
+  };
+
   const onSearch = (value: string) => console.log(value);
   const onChange = (e: CheckboxChangeEvent) => {
     console.log(`checked = ${e.target.checked}`);
@@ -83,7 +77,7 @@ export const PageList: FC<PageListProps> = () => {
 
   return (
     <>
-      <NavBarPage type="pages" />
+      <NavBarPage type="pages" userData={userData} />
       <Row className="mainContainer" gutter={16}>
         <Col className="gutter-row leftCol" span={6}>
           <div className="">
@@ -104,7 +98,7 @@ export const PageList: FC<PageListProps> = () => {
                   onSearch={onSearch}
                   enterButton
                 />
-                {userData.role === "DEVELOPER" && (
+                {userData && userData.role === "DEVELOPER" && (
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -127,13 +121,13 @@ export const PageList: FC<PageListProps> = () => {
                 pageSize: 5,
               }}
               dataSource={pages}
-              renderItem={(item) => (
+              renderItem={(page) => (
                 <List.Item
-                  key={item.name}
+                  key={page.name}
                   actions={[
-                    item.user.role === "DEVELOPER" ? (
+                    userData && userData.role === "DEVELOPER" ? (
                       <Dropdown
-                        overlay={appMenu}
+                        overlay={appMenu(page, pageDelete, pageRename)}
                         className="menuAvatar"
                         arrow
                         placement="bottomRight"
@@ -149,9 +143,9 @@ export const PageList: FC<PageListProps> = () => {
                     avatar={
                       <img src={appAvatar} alt="App Avatar" className="" />
                     }
-                    title={<Link to={item.id}>{item.name}</Link>}
+                    title={<Link to={page.id}>{page.name}</Link>}
                     description={`Last edited on ${new Date(
-                      item.updatedAt
+                      page.updatedAt
                     ).toDateString()}`}
                   />
                 </List.Item>
@@ -165,16 +159,26 @@ export const PageList: FC<PageListProps> = () => {
 };
 
 const appMenu = (
+  pageData: PageListItem,
+  pageDelete: (page: PageListItem) => void,
+  pageRename: (page: PageListItem) => void
+) => (
   <Menu
     items={[
       {
         key: "1",
-        label: <Link to="/">Duplicate</Link>,
+        label: "Rename",
+        onClick: () => {
+          pageRename(pageData);
+        },
       },
       {
         key: "2",
         danger: true,
-        label: <Link to="/">Delete</Link>,
+        label: "Delete",
+        onClick: () => {
+          pageDelete(pageData);
+        },
       },
     ]}
   />

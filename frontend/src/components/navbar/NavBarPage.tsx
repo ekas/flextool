@@ -12,12 +12,14 @@ import dataSourcesIcon from "../../assets/datasource.svg";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./index.less";
+import { User } from "types/user.type";
 
 interface NavBarPageProps {
   type: "pages" | "page";
+  userData?: User;
 }
 
-const NavBarPage: FC<NavBarPageProps> = ({ type }) => {
+const NavBarPage: FC<NavBarPageProps> = ({ type, userData }) => {
   const navigate = useNavigate();
   return (
     <>
@@ -43,7 +45,7 @@ const NavBarPage: FC<NavBarPageProps> = ({ type }) => {
             </Menu.Item>
           </Menu>
           <Dropdown
-            overlay={userMenu}
+            overlay={userMenu(userData ? userData : null)}
             className="menuAvatar"
             arrow
             placement="bottomRight"
@@ -88,7 +90,7 @@ const NavBarPage: FC<NavBarPageProps> = ({ type }) => {
             Back
           </Button>
           <Dropdown
-            overlay={userMenu}
+            overlay={userMenu(userData ? userData : null)}
             className="menuAvatar"
             arrow
             placement="bottomRight"
@@ -106,17 +108,22 @@ const NavBarPage: FC<NavBarPageProps> = ({ type }) => {
   );
 };
 
-const userMenu = (
+const userMenu = (userData: User | null) => (
   <Menu
     items={[
       {
         key: "1",
-        label: <Link to="/">Profile</Link>,
+        label: userData
+          ? `Hello ${userData?.firstName} ${userData?.lastName}`
+          : "Hello User",
+      },
+      {
+        type: "divider",
       },
       {
         key: "2",
         danger: true,
-        label: <>Logout</>,
+        label: "Logout",
         onClick: () => {
           localStorage.removeItem("auth");
           window.location.href = "/";

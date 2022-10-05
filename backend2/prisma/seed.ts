@@ -19,37 +19,6 @@ async function main() {
     },
   });
 
-  const page1 = await prisma.page.create({
-    data: {
-      name: 'App1',
-      isPublic: true,
-      slug: 'app1',
-      definition:
-        '{"component":{"name":"App1","x":0,"y":0,"width":100,"height":100,"data":{}}}',
-      user: {
-        connect: {
-          id: user1.id,
-        },
-      },
-    },
-  });
-
-  const comment1 = await prisma.comment.create({
-    data: {
-      text: 'Comment1 from User John on App 1',
-      page: {
-        connect: {
-          id: page1.id,
-        },
-      },
-      user: {
-        connect: {
-          id: user1.id,
-        },
-      },
-    },
-  });
-
   const user2 = await prisma.user.create({
     data: {
       email: 'bile.simpson@gmail.com',
@@ -60,13 +29,44 @@ async function main() {
     },
   });
 
+  const page1 = await prisma.page.create({
+    data: {
+      name: 'Page 1',
+      isPublic: true,
+      slug: 'page1',
+      definition:
+        '{"component":{"name":"Page1 Component1","x":0,"y":0,"width":100,"height":100,"data":{}}}',
+      user: {
+        connect: {
+          id: user2.id,
+        },
+      },
+    },
+  });
+
+  const comment1 = await prisma.comment.create({
+    data: {
+      text: 'Comment1 from User Bile on Page 1',
+      page: {
+        connect: {
+          id: page1.id,
+        },
+      },
+      user: {
+        connect: {
+          id: user2.id,
+        },
+      },
+    },
+  });
+
   const page2 = await prisma.page.create({
     data: {
-      name: 'App2',
+      name: 'Page 2',
       isPublic: true,
-      slug: 'app2',
+      slug: 'page2',
       definition:
-        '{"component":{"name":"App2","x":0,"y":0,"width":100,"height":100,"data":{}}}',
+        '{"component":{"name":"Page2 Component1","x":0,"y":0,"width":100,"height":100,"data":{}}}',
       user: {
         connect: {
           id: user2.id,
@@ -77,10 +77,41 @@ async function main() {
 
   const comment2 = await prisma.comment.create({
     data: {
-      text: 'Comment2 from User Bile on App 2',
+      text: 'Comment2 from User Bile on Page 2',
       page: {
         connect: {
           id: page2.id,
+        },
+      },
+      user: {
+        connect: {
+          id: user2.id,
+        },
+      },
+    },
+  });
+
+  const page3 = await prisma.page.create({
+    data: {
+      name: 'Page 3',
+      isPublic: false,
+      slug: 'page3',
+      definition:
+        '{"component":{"name":"Page3 Component1","x":0,"y":0,"width":100,"height":100,"data":{}}}',
+      user: {
+        connect: {
+          id: user2.id,
+        },
+      },
+    },
+  });
+
+  const comment3 = await prisma.comment.create({
+    data: {
+      text: 'Comment3 from User Bile on Page 3',
+      page: {
+        connect: {
+          id: page3.id,
         },
       },
       user: {
@@ -101,27 +132,28 @@ async function main() {
     },
   });
 
-  const page3 = await prisma.page.create({
+  const comment4 = await prisma.comment.create({
     data: {
-      name: 'App3',
-      isPublic: true,
-      slug: 'app3',
-      definition:
-        '{"component":{"name":"App3","x":0,"y":0,"width":100,"height":100,"data":{}}}',
+      text: 'Comment4 from User John on Page 1',
+      page: {
+        connect: {
+          id: page1.id,
+        },
+      },
       user: {
         connect: {
-          id: user3.id,
+          id: user1.id,
         },
       },
     },
   });
 
-  const comment3 = await prisma.comment.create({
+  const comment5 = await prisma.comment.create({
     data: {
-      text: 'Comment3 from User Ekas Preet on App 3',
+      text: 'Comment5 from User Ekas on Page 2',
       page: {
         connect: {
-          id: page3.id,
+          id: page2.id,
         },
       },
       user: {

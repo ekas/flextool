@@ -32,12 +32,3 @@ export const USER_SIGNUP = gql`
     }
   }
 `;
-
-export const USER_DATA_QUERY = gql`
-  query Me {
-    me {
-      id
-      role
-    }
-  }
-`;
