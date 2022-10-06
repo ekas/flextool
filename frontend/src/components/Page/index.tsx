@@ -5,8 +5,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import ComponentsProvider from "contexts/ComponentsContext";
 import Preview from "components/editor/preview/Preview";
-import DraggableComponent from "components/editor/draggableElements/DraggableComponent";
-import DraggableComponent2 from "components/editor/draggableElements/DraggableComponent2";
+import ElementList from "components/editor/elementList";
 import { PAGE_WITH_DATA } from "queries/page.query";
 import { useLazyQuery } from "@apollo/client";
 import { toast } from "react-toastify";
@@ -49,8 +48,7 @@ const Page: FC = () => {
             </div>
             <div className="page pageRight">
               <div className="draggableComponentContainer">
-                <DraggableComponent />
-                <DraggableComponent2 />
+                <ElementList />
               </div>
             </div>
           </ComponentsProvider>

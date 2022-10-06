@@ -2,17 +2,18 @@ import { DRAG_TYPES } from "constants/DragTypes";
 import { useComponents } from "contexts/ComponentsContext";
 import { createElement, useCallback, useState } from "react";
 import { useDrop } from "react-dnd";
-import ComponentName from "../elements/ComponentName";
-import ComponentName2 from "../elements/ComponentName2";
+import TableBlock from "../elements/TableBlock";
+import ArticleBlock from "../elements/ArticleBlock";
 import PreviewContainer from "./PreviewContainer";
 import { v4 as uuidv4 } from "uuid";
 
 import "./index.less";
 
 const PreviewComponents = {
-  ComponentName,
-  ComponentName2,
+  TableBlock,
+  ArticleBlock,
 };
+
 const Preview = () => {
   const [focused, setFocused] = useState();
   const { components, setComponents } = useComponents();
@@ -38,7 +39,7 @@ const Preview = () => {
       console.log("item dropped!", item);
       const componentStructure = {
         id: uuidv4(),
-        name: item.id,
+        name: item.name,
         props: {},
       };
       setComponents((prevValue) => [...prevValue, componentStructure]);

@@ -1,7 +1,7 @@
 import { Table } from "antd";
 import { FC } from "react";
 
-const ComponentName: FC = () => {
+const TableBlock: FC = () => {
   const dataSource = [
     {
       key: "1",
@@ -86,4 +86,4 @@ const ComponentName: FC = () => {
   return <Table dataSource={dataSource} columns={columns} />;
 };
 
-export default ComponentName;
+export default TableBlock;

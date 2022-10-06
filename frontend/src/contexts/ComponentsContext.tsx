@@ -19,7 +19,7 @@ export default function ComponentsProvider(props: ComponentsProviderProps) {
     //@ToDO
     {
       id: "a3cf32ad-5d47-4b71-af79-6c5943bd41c8",
-      name: "ComponentName",
+      name: "TableBlock",
       props: {},
     },
   ]);

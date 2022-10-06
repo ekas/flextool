@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Rnd } from "react-rnd";
-import ElementActions from "../elements/ElementActions";
+import ElementActions from "../elementActions";
 
 interface PreviewContainerProps {
   index: number;

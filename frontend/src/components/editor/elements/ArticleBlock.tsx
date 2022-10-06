@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-const ComponentName2: FC = () => {
+const ArticleBlock: FC = () => {
   return (
     <div
       className="box"
@@ -52,4 +52,4 @@ const ComponentName2: FC = () => {
   );
 };
 
-export default ComponentName2;
+export default ArticleBlock;
