@@ -13,16 +13,17 @@ import dataSourcesIcon from "../../assets/datasource.svg";
 import { useNavigate } from "react-router-dom";
 import { User } from "types/user.type";
 import CustomComment from "components/comments";
+import { PageItem } from "types/page.type";
 
 import "./index.less";
 
 interface NavBarPageProps {
   type: "pages" | "page";
   userData: User | undefined;
-  pageId?: string;
+  pageData?: PageItem;
 }
 
-const NavBarPage: FC<NavBarPageProps> = ({ type, userData, pageId }) => {
+const NavBarPage: FC<NavBarPageProps> = ({ type, userData, pageData }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -79,7 +80,7 @@ const NavBarPage: FC<NavBarPageProps> = ({ type, userData, pageId }) => {
               className="menuContainer"
             >
               <img src={logo} alt="Logo" className="appLogo" />
-              <h4 className="pageName">Page Name</h4>
+              <h4 className="pageName">{pageData?.name}</h4>
             </Menu>
             <Button
               type="primary"
@@ -89,7 +90,7 @@ const NavBarPage: FC<NavBarPageProps> = ({ type, userData, pageId }) => {
             >
               Preview
             </Button>
-            <Button htmlType="submit" className="shareBtn">
+            <Button htmlType="submit" className="shareBtn" disabled>
               Share
             </Button>
             <Button type="primary" htmlType="submit" className="saveBtn">
@@ -132,7 +133,10 @@ const NavBarPage: FC<NavBarPageProps> = ({ type, userData, pageId }) => {
             onClose={onClose}
             visible={open}
           >
-            <CustomComment pageId={pageId} userData={userData} />
+            <CustomComment
+              pageId={pageData && pageData.id}
+              userData={userData}
+            />
           </Drawer>
         </>
       )}

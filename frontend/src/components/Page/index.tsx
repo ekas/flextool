@@ -37,7 +37,7 @@ const Page: FC = () => {
     <>
       <NavBarPage
         type="page"
-        pageId={pageId}
+        pageData={pageData}
         userData={pageData ? pageData.user : undefined}
       />
       <Outlet />
