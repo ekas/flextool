@@ -58,7 +58,11 @@ const CommentList = ({
     header={`${comments.length} ${comments.length > 1 ? "replies" : "reply"}`}
     itemLayout="horizontal"
     renderItem={(comment) => (
-      <Comment {...comment} actions={actions(comment, userId, deleteComment)} />
+      <Comment
+        {...comment}
+        author={comment.userid === userId ? "You" : comment.author}
+        actions={actions(comment, userId, deleteComment)}
+      />
     )}
   />
 );
