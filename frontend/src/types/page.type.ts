@@ -1,6 +1,6 @@
 import { User } from "./user.type";
 
-export interface PageListItem {
+export interface PageItem {
   createdAt: string;
   definition: string;
   id: string;

@@ -1,5 +1,12 @@
 import { PrismaService } from 'nestjs-prisma';
-import { Resolver, Args, Mutation, Query } from '@nestjs/graphql';
+import {
+  Resolver,
+  Args,
+  Mutation,
+  Query,
+  Parent,
+  ResolveField,
+} from '@nestjs/graphql';
 import { NotFoundException, UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/auth/gql-auth.guard';
 import { UserEntity } from 'src/common/decorators/user.decorator';
@@ -77,6 +84,13 @@ export class CommentsResolver {
     if (!getComment) throw new NotFoundException(`Comment not Found`);
     return await this.prisma.comment.delete({
       where: { id: commentId.id },
+    });
+  }
+
+  @ResolveField('user', () => User)
+  getCommentUser(@Parent() getPageComments: Comment) {
+    return this.prisma.user.findUnique({
+      where: { id: getPageComments.userId },
     });
   }
 }

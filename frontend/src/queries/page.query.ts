@@ -15,6 +15,28 @@ export const GET_PAGES = gql`
   }
 `;
 
+export const PAGE_WITH_DATA = gql`
+  query userPage($id: String!) {
+    userPageWithComponentData(pageId: $id) {
+      id
+      name
+      isPublic
+      slug
+      createdAt
+      updatedAt
+      definition
+      userId
+      user {
+        id
+        role
+        firstName
+        lastName
+        email
+      }
+    }
+  }
+`;
+
 export const PAGE_DELETE = gql`
   mutation deletPage($id: String!) {
     deletePage(pageId: $id) {

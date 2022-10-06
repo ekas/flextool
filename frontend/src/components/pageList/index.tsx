@@ -19,7 +19,7 @@ import { CheckboxChangeEvent } from "antd/lib/checkbox";
 import NavBarPage from "components/navbar/NavBarPage";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { toast } from "react-toastify";
-import { PageListItem } from "types/page.type";
+import { PageItem } from "types/page.type";
 import { User } from "types/user.type";
 import CustomModal from "components/customModal";
 import { USER_DATA_QUERY } from "queries/user.query";
@@ -37,8 +37,8 @@ type PageListProps = {};
 export const PageList: FC<PageListProps> = () => {
   const { Search } = Input;
   const [userData, setUserData] = useState<User | undefined>(undefined);
-  const [pages, setPages] = useState<PageListItem[] | undefined>(undefined);
-  const [pageData, setPageData] = useState<PageListItem | undefined>(undefined);
+  const [pages, setPages] = useState<PageItem[] | undefined>(undefined);
+  const [pageData, setPageData] = useState<PageItem | undefined>(undefined);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("Create New Page");
@@ -112,12 +112,12 @@ export const PageList: FC<PageListProps> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const pageDelete = (page: PageListItem) => {
+  const pageDelete = (page: PageItem) => {
     setLoading(true);
     deletePage({ variables: { id: page.id } });
   };
 
-  const pageRenameModal = (page: PageListItem) => {
+  const pageRenameModal = (page: PageItem) => {
     setPageData(page);
     setModalTitle("Rename Page");
     setModalInput(page.name);
@@ -254,9 +254,9 @@ export const PageList: FC<PageListProps> = () => {
 };
 
 const appMenu = (
-  pageData: PageListItem,
-  pageDelete: (page: PageListItem) => void,
-  pageRenameModal: (page: PageListItem) => void
+  pageData: PageItem,
+  pageDelete: (page: PageItem) => void,
+  pageRenameModal: (page: PageItem) => void
 ) => (
   <Menu
     items={[

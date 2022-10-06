@@ -1,26 +1,38 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { FC } from "react";
-import { Avatar, Button, Dropdown, Menu, Space } from "antd";
+import { FC, useState } from "react";
+import { Avatar, Button, Drawer, Dropdown, Menu, Space } from "antd";
 import {
   UserOutlined,
   CaretDownOutlined,
   CaretRightOutlined,
+  CommentOutlined,
 } from "@ant-design/icons";
 import logo from "../../assets/logo.svg";
 import appsIcon from "../../assets/apps.svg";
 import dataSourcesIcon from "../../assets/datasource.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { User } from "types/user.type";
+import CustomComment from "components/comments";
 
 import "./index.less";
-import { User } from "types/user.type";
 
 interface NavBarPageProps {
   type: "pages" | "page";
-  userData?: User;
+  userData: User | undefined;
+  pageId?: string;
 }
 
-const NavBarPage: FC<NavBarPageProps> = ({ type, userData }) => {
+const NavBarPage: FC<NavBarPageProps> = ({ type, userData, pageId }) => {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
+  const showCommentsDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
   return (
     <>
       {type === "pages" ? (
@@ -59,50 +71,70 @@ const NavBarPage: FC<NavBarPageProps> = ({ type, userData }) => {
           </Dropdown>
         </div>
       ) : (
-        <div className="navBarContainer">
-          <Menu
-            mode="horizontal"
-            defaultSelectedKeys={["apps"]}
-            className="menuContainer"
+        <>
+          <div className="navBarContainer">
+            <Menu
+              mode="horizontal"
+              defaultSelectedKeys={["apps"]}
+              className="menuContainer"
+            >
+              <img src={logo} alt="Logo" className="appLogo" />
+              <h4 className="pageName">Page Name</h4>
+            </Menu>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="previewBtn"
+              icon={<CaretRightOutlined />}
+            >
+              Preview
+            </Button>
+            <Button htmlType="submit" className="shareBtn">
+              Share
+            </Button>
+            <Button type="primary" htmlType="submit" className="saveBtn">
+              Save
+            </Button>
+            <Button
+              htmlType="submit"
+              className="backBtn"
+              onClick={() => navigate(-1)}
+            >
+              Back
+            </Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="commentsBtn"
+              icon={<CommentOutlined />}
+              onClick={showCommentsDrawer}
+            >
+              Comments
+            </Button>
+            <Dropdown
+              overlay={userMenu(userData ? userData : null)}
+              className="menuAvatar"
+              arrow
+              placement="bottomRight"
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <Space>
+                  <Avatar size={35} icon={<UserOutlined />} />
+                  <CaretDownOutlined />
+                </Space>
+              </a>
+            </Dropdown>
+          </div>
+          <Drawer
+            title={"Comments"}
+            placement="left"
+            size={"large"}
+            onClose={onClose}
+            visible={open}
           >
-            <img src={logo} alt="Logo" className="appLogo" />
-            <h4 className="pageName">Page Name</h4>
-          </Menu>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="previewBtn"
-            icon={<CaretRightOutlined />}
-          >
-            Preview
-          </Button>
-          <Button htmlType="submit" className="shareBtn">
-            Share
-          </Button>
-          <Button type="primary" htmlType="submit" className="saveBtn">
-            Save
-          </Button>
-          <Button
-            htmlType="submit"
-            className="backBtn"
-            onClick={() => navigate(-1)}
-          >
-            Back
-          </Button>
-          <Dropdown
-            overlay={userMenu(userData ? userData : null)}
-            className="menuAvatar"
-            arrow
-            placement="bottomRight"
-          >
-            <a onClick={(e) => e.preventDefault()}>
-              <Space>
-                <Avatar size={35} icon={<UserOutlined />} />
-                <CaretDownOutlined />
-              </Space>
-            </a>
-          </Dropdown>
-        </div>
+            <CustomComment pageId={pageId} userData={userData} />
+          </Drawer>
+        </>
       )}
     </>
   );

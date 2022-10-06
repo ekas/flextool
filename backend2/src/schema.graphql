@@ -30,6 +30,7 @@ type Comment {
 
   """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime!
+  user: User!
   userId: String!
 }
 

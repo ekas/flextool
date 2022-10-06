@@ -35,4 +35,10 @@ fragment CommentsData on Comment {
   updatedAt
   pageId
   userId
+  user {
+    id
+    firstName
+    lastName
+    email
+  }
 }
