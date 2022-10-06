@@ -51,40 +51,6 @@ const Page: FC = () => {
               <div className="draggableComponentContainer">
                 <DraggableComponent />
                 <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
-                <DraggableComponent />
-                <DraggableComponent2 />
               </div>
             </div>
           </ComponentsProvider>

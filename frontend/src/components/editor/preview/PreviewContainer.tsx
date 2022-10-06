@@ -36,7 +36,7 @@ const PreviewContainer = ({
     setWidth(newWidth);
   };
 
-  useEffect(() => getComponentDimensions(), []);
+  useEffect(() => getComponentDimensions());
 
   return (
     <Rnd
@@ -46,6 +46,13 @@ const PreviewContainer = ({
         width: 320,
         height: 200,
       }}
+      //@TODO
+      /* onResize={(e, direction, ref, delta, position) => {
+        console.log("resized", position);
+      }}
+      onDrag={(e, d) => {
+        console.log("dragged", d);
+      }} */
       minWidth={width}
       minHeight={height && height + 20}
       bounds="window"
