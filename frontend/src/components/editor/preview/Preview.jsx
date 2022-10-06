@@ -5,6 +5,7 @@ import { useDrop } from "react-dnd";
 import ComponentName from "../elements/ComponentName";
 import ComponentName2 from "../elements/ComponentName2";
 import PreviewContainer from "./PreviewContainer";
+import { v4 as uuidv4 } from "uuid";
 
 import "./index.less";
 
@@ -15,6 +16,9 @@ const PreviewComponents = {
 const Preview = () => {
   const [focused, setFocused] = useState();
   const { components, setComponents } = useComponents();
+  /* useEffect(() => {
+    console.log("components", components);
+  }, [components]); */
 
   const clickHandler = useCallback(
     (index) => {
@@ -33,6 +37,7 @@ const Preview = () => {
       }
       console.log("item dropped!", item);
       const componentStructure = {
+        id: uuidv4(),
         name: item.id,
         props: {},
       };
@@ -50,13 +55,13 @@ const Preview = () => {
       if (typeof PreviewComponents[component.name] !== "undefined") {
         const NewComponent = createElement(PreviewComponents[component.name], {
           // @TODO: Use a hash here?
-          key: index,
+          key: component.id,
           ...component.props,
         });
         return createElement(
           PreviewContainer,
           {
-            kay: index,
+            key: index,
             index,
             onClick: clickHandler,
             focused: focused === index ? true : false,
