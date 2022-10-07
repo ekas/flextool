@@ -1,4 +1,5 @@
 import { FC } from "react";
+import logo from "../../../assets/logo.svg";
 
 const ArticleBlock: FC = () => {
   return (
@@ -9,11 +10,7 @@ const ArticleBlock: FC = () => {
       <article className="media">
         <div className="media-left">
           <figure className="image is-64x64">
-            <img
-              src="https://avatars1.githubusercontent.com/u/10220449?v=3&s=460"
-              draggable="false"
-              alt="github avatar"
-            />
+            <img src={logo} alt="Logo" />
           </figure>
         </div>
         <div className="media-content">
