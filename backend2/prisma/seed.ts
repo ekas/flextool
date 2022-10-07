@@ -35,7 +35,7 @@ async function main() {
       isPublic: true,
       slug: 'page1',
       definition:
-        '{"component":{"name":"Page1 Component1","x":0,"y":0,"width":100,"height":100,"data":{}}}',
+        '[{"id":"a3cf32ad-5d47-4b71-af79-6c5943bd41c8","name":"TableBlock","displayName":"TableBlock 1","props":{},"position":{"x":0,"y":20,"width":320,"height":669}}]',
       user: {
         connect: {
           id: user2.id,
@@ -66,7 +66,7 @@ async function main() {
       isPublic: true,
       slug: 'page2',
       definition:
-        '{"component":{"name":"Page2 Component1","x":0,"y":0,"width":100,"height":100,"data":{}}}',
+        '[{"id":"a3cf32ad-5d47-4b71-af79-6c5943bd41c8","name":"TableBlock","displayName":"TableBlock 1","props":{},"position":{"x":0,"y":20,"width":320,"height":669}}]',
       user: {
         connect: {
           id: user2.id,
@@ -97,7 +97,7 @@ async function main() {
       isPublic: false,
       slug: 'page3',
       definition:
-        '{"component":{"name":"Page3 Component1","x":0,"y":0,"width":100,"height":100,"data":{}}}',
+        '[{"id":"a3cf32ad-5d47-4b71-af79-6c5943bd41c8","name":"TableBlock","displayName":"TableBlock 1","props":{},"position":{"x":0,"y":20,"width":320,"height":669}}]',
       user: {
         connect: {
           id: user2.id,
