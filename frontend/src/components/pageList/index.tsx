@@ -37,6 +37,9 @@ type PageListProps = {};
 export const PageList: FC<PageListProps> = () => {
   const { Search } = Input;
   const [userData, setUserData] = useState<User | undefined>(undefined);
+  const [originalPages, setOriginalPages] = useState<PageItem[] | undefined>(
+    undefined
+  );
   const [pages, setPages] = useState<PageItem[] | undefined>(undefined);
   const [pageData, setPageData] = useState<PageItem | undefined>(undefined);
   const [loading, setLoading] = useState(true);
@@ -55,6 +58,7 @@ export const PageList: FC<PageListProps> = () => {
 
   const [getPages] = useLazyQuery(GET_PAGES, {
     onCompleted: (QueryData) => {
+      setOriginalPages(QueryData.userPages);
       setPages(QueryData.userPages);
       setLoading(false);
     },
@@ -139,7 +143,10 @@ export const PageList: FC<PageListProps> = () => {
     });
   };
 
-  const onSearch = (value: string) => console.log(value);
+  const onSearch = (value: string) => {
+    originalPages &&
+      setPages(originalPages.filter((page) => page.name.includes(value)));
+  };
   const onChange = (e: CheckboxChangeEvent) => {};
 
   return (
