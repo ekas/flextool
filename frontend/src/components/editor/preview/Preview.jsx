@@ -19,7 +19,7 @@ const PreviewComponents = {
 
 const Preview = ({ pageData, pageQueryType, setPageQueryType }) => {
   const [focused, setFocused] = useState();
-  const { components } = useComponents();
+  const { components, setComponents } = useComponents();
   const [componentsData, setComponentsData] = useState([...components]);
 
   const [editPage] = useMutation(PAGE_EDIT, {
@@ -31,6 +31,14 @@ const Preview = ({ pageData, pageQueryType, setPageQueryType }) => {
       toast.error(error.message);
     },
   });
+
+  useEffect(() => {
+    if (pageData) {
+      setComponents([...JSON.parse(pageData.definition)]);
+      setComponentsData([...JSON.parse(pageData.definition)]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageData]);
 
   useEffect(() => {
     pageQueryType === "save" &&
