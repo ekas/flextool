@@ -13,6 +13,7 @@ interface PreviewContainerProps {
   onClick: Function;
   children: React.ReactNode;
   elementData: ComponentProps;
+  deleteHandler: (elementId: string) => void;
 }
 
 const PreviewContainer = ({
@@ -21,6 +22,7 @@ const PreviewContainer = ({
   index,
   onClick,
   elementData,
+  deleteHandler,
 }: PreviewContainerProps) => {
   // console.log("PreviewContainer", elementData);
   const ref = useRef(null as null | HTMLDivElement);
@@ -79,6 +81,10 @@ const PreviewContainer = ({
     }
   };
 
+  const deleteComponentHandler = (elementId: string) => {
+    deleteHandler(elementId);
+  };
+
   useEffect(() => {
     console.log("position updated", position);
     setcomponentsHandler();
@@ -116,7 +122,13 @@ const PreviewContainer = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {(hovered || focused) && <ElementActions />}
+      {(hovered || focused) && (
+        <ElementActions
+          displayName={elementData.name}
+          onDelete={deleteComponentHandler}
+          elementId={elementData.id}
+        />
+      )}
       <div ref={ref}>{children}</div>
     </Rnd>
   );

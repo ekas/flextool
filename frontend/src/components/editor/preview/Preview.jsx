@@ -22,6 +22,16 @@ const Preview = ({ pageData, pageQueryType, setPageQueryType }) => {
   const { components, setComponents } = useComponents();
   const [componentsData, setComponentsData] = useState([...components]);
 
+  const deleteComponentHandler = (index) => {
+    setComponents &&
+      setComponents([
+        ...components.filter((component) => component.id !== index),
+      ]);
+    setComponentsData([
+      ...componentsData.filter((component) => component.id !== index),
+    ]);
+  };
+
   const [editPage] = useMutation(PAGE_EDIT, {
     onCompleted: (QueryData) => {
       setPageQueryType(null);
@@ -87,13 +97,19 @@ const Preview = ({ pageData, pageQueryType, setPageQueryType }) => {
           components={componentsData}
           clickHandler={clickHandler}
           focused={focused}
+          deleteComponentHandler={deleteComponentHandler}
         />
       </div>
     </div>
   );
 };
 
-const ComponentPreview = ({ components, clickHandler, focused }) => {
+const ComponentPreview = ({
+  components,
+  clickHandler,
+  focused,
+  deleteComponentHandler,
+}) => {
   return (
     <>
       {components.map((component, index) => {
@@ -114,6 +130,7 @@ const ComponentPreview = ({ components, clickHandler, focused }) => {
               onClick: clickHandler,
               focused: focused === index ? true : false,
               elementData: component,
+              deleteHandler: deleteComponentHandler,
             },
             [NewComponent]
           );
