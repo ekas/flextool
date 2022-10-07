@@ -12,6 +12,7 @@ import {
   Row,
   Spin,
 } from "antd";
+import { CloseOutlined } from "@ant-design/icons";
 import appAvatar from "../../assets/app_avatar.svg";
 import popMenu from "../../assets/pop_menu.svg";
 import { Link } from "react-router-dom";
@@ -46,6 +47,7 @@ export const PageList: FC<PageListProps> = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("Create New Page");
   const [modalInput, setModalInput] = useState("");
+  const [searchInput, setSearchInput] = useState("");
 
   const [userQuery] = useLazyQuery(USER_DATA_QUERY, {
     onCompleted: (QueryData) => {
@@ -171,7 +173,12 @@ export const PageList: FC<PageListProps> = () => {
                     className="searchField"
                     placeholder="Input Search Text"
                     onSearch={onSearch}
+                    suffix={
+                      <CloseOutlined onClick={() => setSearchInput("")} />
+                    }
                     enterButton
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    value={searchInput}
                   />
                   {userData && userData.role === "DEVELOPER" && (
                     <Button
