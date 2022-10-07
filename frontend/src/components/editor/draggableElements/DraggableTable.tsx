@@ -9,7 +9,11 @@ interface DraggableTableProps {}
 const DraggableTable: FC<DraggableTableProps> = () => {
   const [, drag] = useDrag({
     type: DRAG_TYPES.COMPONENT,
-    item: { name: "TableBlock", props: {} },
+    item: {
+      name: "TableBlock",
+      props: {},
+      position: { x: 20, y: 20, width: 320, height: 669 },
+    },
   });
   return (
     <div ref={drag} className="draggableComponent">
