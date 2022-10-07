@@ -13,7 +13,7 @@ const DraggableArticleBlock: FC<DraggableArticleBlockProps> = () => {
       name: "ArticleBlock",
       displayName: "ArticleBlock",
       props: {},
-      position: { x: 20, y: 20, width: 320, height: 246 },
+      position: { x: 50, y: 50, width: 320, height: 246 },
     },
   });
   return (

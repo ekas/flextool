@@ -37,7 +37,7 @@ export default function ComponentsProvider(props: ComponentsProviderProps) {
       name: "TableBlock",
       displayName: "",
       props: {},
-      position: { x: 20, y: 20, width: 320, height: 200 },
+      position: { x: 50, y: 50, width: 320, height: 200 },
     },
   ]);
   return (

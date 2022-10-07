@@ -13,7 +13,7 @@ const DraggableTable: FC<DraggableTableProps> = () => {
       name: "TableBlock",
       displayName: "",
       props: {},
-      position: { x: 20, y: 20, width: 320, height: 669 },
+      position: { x: 50, y: 50, width: 320, height: 669 },
     },
   });
   return (
