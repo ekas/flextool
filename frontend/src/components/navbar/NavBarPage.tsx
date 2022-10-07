@@ -9,7 +9,6 @@ import {
 } from "@ant-design/icons";
 import logo from "../../assets/logo.svg";
 import appsIcon from "../../assets/apps.svg";
-import dataSourcesIcon from "../../assets/datasource.svg";
 import { useNavigate } from "react-router-dom";
 import { User } from "types/user.type";
 import CustomComment from "components/comments";
@@ -21,9 +20,17 @@ interface NavBarPageProps {
   type: "pages" | "page";
   userData: User | undefined;
   pageData?: PageItem;
+  pageSaveHandler?: () => void;
+  pagePreviewHandler?: () => void;
 }
 
-const NavBarPage: FC<NavBarPageProps> = ({ type, userData, pageData }) => {
+const NavBarPage: FC<NavBarPageProps> = ({
+  type,
+  userData,
+  pageData,
+  pageSaveHandler,
+  pagePreviewHandler,
+}) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -49,12 +56,6 @@ const NavBarPage: FC<NavBarPageProps> = ({ type, userData, pageData }) => {
               icon={<img src={appsIcon} alt="Pages Menu" />}
             >
               Pages
-            </Menu.Item>
-            <Menu.Item
-              key="datasource"
-              icon={<img src={dataSourcesIcon} alt="Data Source Menu" />}
-            >
-              Data Sources
             </Menu.Item>
           </Menu>
           <Dropdown
@@ -82,20 +83,27 @@ const NavBarPage: FC<NavBarPageProps> = ({ type, userData, pageData }) => {
               <img src={logo} alt="Logo" className="appLogo" />
               <h4 className="pageName">{pageData?.name}</h4>
             </Menu>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="previewBtn"
-              icon={<CaretRightOutlined />}
-            >
-              Preview
-            </Button>
-            <Button htmlType="submit" className="shareBtn" disabled>
-              Share
-            </Button>
-            <Button type="primary" htmlType="submit" className="saveBtn">
-              Save
-            </Button>
+            {userData?.role === "DEVELOPER" && (
+              <>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="previewBtn"
+                  icon={<CaretRightOutlined />}
+                  onClick={pagePreviewHandler}
+                >
+                  Preview
+                </Button>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="saveBtn"
+                  onClick={pageSaveHandler}
+                >
+                  Save
+                </Button>
+              </>
+            )}
             <Button
               htmlType="submit"
               className="backBtn"
