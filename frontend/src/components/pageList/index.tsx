@@ -130,7 +130,6 @@ export const PageList: FC<PageListProps> = () => {
   };
 
   const createNewPage = (pageName: string) => {
-    console.log("menu page create", pageName);
     setLoading(true);
     createPage({
       variables: {
@@ -141,9 +140,7 @@ export const PageList: FC<PageListProps> = () => {
   };
 
   const onSearch = (value: string) => console.log(value);
-  const onChange = (e: CheckboxChangeEvent) => {
-    console.log(`checked = ${e.target.checked}`);
-  };
+  const onChange = (e: CheckboxChangeEvent) => {};
 
   return (
     <>
@@ -190,9 +187,7 @@ export const PageList: FC<PageListProps> = () => {
                 itemLayout="horizontal"
                 size="large"
                 pagination={{
-                  onChange: (page) => {
-                    console.log(page);
-                  },
+                  onChange: (page) => {},
                   pageSize: 5,
                 }}
                 dataSource={pages}

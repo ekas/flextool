@@ -1,13 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Rnd } from "react-rnd";
 import ElementActions from "../elementActions";
+import {
+  ComponentProps,
+  PositionProps,
+  useComponents,
+} from "contexts/ComponentsContext";
 
 interface PreviewContainerProps {
   index: number;
   focused: boolean;
   onClick: Function;
   children: React.ReactNode;
-  elementId: string;
+  elementData: ComponentProps;
 }
 
 const PreviewContainer = ({
@@ -15,47 +20,82 @@ const PreviewContainer = ({
   focused,
   index,
   onClick,
-  elementId,
+  elementData,
 }: PreviewContainerProps) => {
-  console.log("PreviewContainer", elementId);
+  console.log("PreviewContainer", elementData);
   const ref = useRef(null as null | HTMLDivElement);
-  const [width, setWidth] = useState();
-  const [height, setHeight] = useState();
+  const { components, setComponents } = useComponents();
+  const [position, setPosition] = useState<PositionProps>({
+    ...elementData.position,
+  });
   const [hovered, setHovered] = useState(false);
 
   const clickHandler = useCallback(
     () => {
-      console.log("clicked 1");
+      console.log("Click Index", index);
       onClick(index);
     },
     // eslint-disable-next-line
     [onClick]
   );
 
-  const getComponentDimensions = () => {
-    const newHeight: any = ref.current && ref.current.clientHeight;
-    setHeight(newHeight);
-    const newWidth: any = ref.current && ref.current.clientWidth;
-    setWidth(newWidth);
+  const getComponentDimensions = useCallback(() => {
+    if (ref.current)
+      setPosition({
+        ...position,
+        height: ref.current.clientHeight,
+        width: ref.current.clientWidth,
+        x: ref.current.offsetLeft,
+        y: ref.current.offsetTop,
+      });
+  }, [position]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => getComponentDimensions(), []);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(
+    () =>
+      console.log("-------------------------------------------", components),
+    [components]
+  );
+
+  const setcomponentsHandler = () => {
+    const componentIndex = components.findIndex(
+      (component) => component.id === elementData.id
+    );
+    if (componentIndex !== -1) {
+      components[componentIndex].position = position;
+    } else {
+      components.push({
+        ...elementData,
+      });
+    }
+    setComponents && setComponents([...components]);
   };
 
-  useEffect(() => getComponentDimensions());
+  useEffect(() => {
+    console.log("position updated", position);
+    setcomponentsHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [position]);
 
+  const { width, height } = position;
   return (
     <Rnd
       default={{
-        x: 20,
-        y: 20,
-        width: 320,
-        height: 200,
+        ...position,
       }}
-      //@TODO
-      /* onResize={(e, direction, ref, delta, position) => {
-        console.log("resized", position);
+      onResizeStop={(e, direction, ref, delta, position) => {
+        setPosition({
+          ...position,
+          width: ref.clientWidth,
+          height: ref.clientHeight,
+        });
       }}
-      onDrag={(e, d) => {
-        console.log("dragged", d);
-      }} */
+      onDragStop={(e, d) => {
+        setPosition({ ...position, x: d.x, y: d.y });
+      }}
       minWidth={width}
       minHeight={height && height + 20}
       bounds="window"
