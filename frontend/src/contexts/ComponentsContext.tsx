@@ -10,6 +10,20 @@ interface ComponentsContextInterface {
   setComponents?: Function;
 }
 
+export interface PositionProps {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+export interface ComponentProps {
+  id: string;
+  name: string;
+  props: any;
+  position: PositionProps;
+}
+
 const ComponentsContext = React.createContext<ComponentsContextInterface>({
   components: [],
 });
@@ -21,6 +35,7 @@ export default function ComponentsProvider(props: ComponentsProviderProps) {
       id: "a3cf32ad-5d47-4b71-af79-6c5943bd41c8",
       name: "TableBlock",
       props: {},
+      position: {},
     },
   ]);
   return (

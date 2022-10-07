@@ -7,6 +7,7 @@ interface PreviewContainerProps {
   focused: boolean;
   onClick: Function;
   children: React.ReactNode;
+  elementId: string;
 }
 
 const PreviewContainer = ({
@@ -14,7 +15,9 @@ const PreviewContainer = ({
   focused,
   index,
   onClick,
+  elementId,
 }: PreviewContainerProps) => {
+  console.log("PreviewContainer", elementId);
   const ref = useRef(null as null | HTMLDivElement);
   const [width, setWidth] = useState();
   const [height, setHeight] = useState();

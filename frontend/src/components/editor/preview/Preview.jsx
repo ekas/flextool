@@ -66,6 +66,7 @@ const Preview = () => {
             index,
             onClick: clickHandler,
             focused: focused === index ? true : false,
+            elementId: component.id,
           },
           [NewComponent]
         );
