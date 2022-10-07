@@ -1,11 +1,14 @@
 import { DRAG_TYPES } from "constants/DragTypes";
-import { createElement, useCallback, useState } from "react";
+import { createElement, useCallback, useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import TableBlock from "../elements/TableBlock";
 import ArticleBlock from "../elements/ArticleBlock";
 import PreviewContainer from "./PreviewContainer";
 import { v4 as uuidv4 } from "uuid";
 import { useComponents } from "contexts/ComponentsContext";
+import { toast } from "react-toastify";
+import { useMutation } from "@apollo/client";
+import { PAGE_EDIT } from "queries/page.query";
 
 import "./index.less";
 
@@ -14,10 +17,30 @@ const PreviewComponents = {
   ArticleBlock,
 };
 
-const Preview = () => {
+const Preview = ({ pageData, pageQueryType, setPageQueryType }) => {
   const [focused, setFocused] = useState();
   const { components } = useComponents();
   const [componentsData, setComponentsData] = useState([...components]);
+
+  const [editPage] = useMutation(PAGE_EDIT, {
+    onCompleted: (QueryData) => {
+      setPageQueryType(null);
+      toast.success(`${QueryData.editPage.name} Saved`);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  useEffect(() => {
+    pageQueryType === "save" &&
+      editPage({
+        variables: { ...pageData, definition: JSON.stringify(components) },
+      });
+    pageQueryType === "preview" &&
+      editPage({ variables: { ...pageData, isPublic: true } });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageQueryType]);
 
   const clickHandler = useCallback(
     (index) => {

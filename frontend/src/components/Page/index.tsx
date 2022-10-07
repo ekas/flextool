@@ -12,17 +12,31 @@ import { toast } from "react-toastify";
 import { PageItem } from "types/page.type";
 import { USER_DATA_QUERY } from "queries/user.query";
 import { User } from "types/user.type";
+import { Spin } from "antd";
 
 import "./index.less";
 
 const Page: FC = () => {
   let { pageId } = useParams();
+  const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<User | undefined>(undefined);
   const [pageData, setPageData] = useState<PageItem>();
+  const [pageQueryType, setPageQueryType] = useState<"save" | "preview" | null>(
+    null
+  );
+
+  const pageSaveHandler = () => {
+    setPageQueryType("save");
+  };
+
+  const pagePreviewHandler = () => {
+    setPageQueryType("preview");
+  };
 
   const [userQuery] = useLazyQuery(USER_DATA_QUERY, {
     onCompleted: (QueryData) => {
       setUserData({ ...QueryData.me });
+      setLoading(false);
     },
     onError: (error) => {
       toast.error(error.message);
@@ -33,6 +47,7 @@ const Page: FC = () => {
     onCompleted: (QueryData) => {
       setPageData(QueryData.userPageWithComponentData);
       toast.success(`${QueryData.userPageWithComponentData.name} page loaded`);
+      setLoading(false);
     },
     onError: (error) => {
       toast.error(error.message);
@@ -47,21 +62,33 @@ const Page: FC = () => {
 
   return (
     <>
-      <NavBarPage type="page" pageData={pageData} userData={userData} />
+      <NavBarPage
+        type="page"
+        pageData={pageData}
+        userData={userData}
+        pageSaveHandler={pageSaveHandler}
+        pagePreviewHandler={pagePreviewHandler}
+      />
       <Outlet />
       <DndProvider backend={HTML5Backend}>
-        <div className="pageContainer">
-          <ComponentsProvider>
-            <div className="page pageLeft">
-              <Preview />
-            </div>
-            <div className="page pageRight">
-              <div className="draggableComponentContainer">
-                <ElementList />
+        <Spin spinning={loading}>
+          <div className="pageContainer">
+            <ComponentsProvider>
+              <div className="page pageLeft">
+                <Preview
+                  pageData={pageData}
+                  pageQueryType={pageQueryType}
+                  setPageQueryType={setPageQueryType}
+                />
               </div>
-            </div>
-          </ComponentsProvider>
-        </div>
+              <div className="page pageRight">
+                <div className="draggableComponentContainer">
+                  <ElementList />
+                </div>
+              </div>
+            </ComponentsProvider>
+          </div>
+        </Spin>
       </DndProvider>
     </>
   );
