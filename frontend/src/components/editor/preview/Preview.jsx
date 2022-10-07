@@ -37,6 +37,7 @@ const Preview = () => {
       const componentStructure = {
         id: uuidv4(),
         name: item.name,
+        displayName: item.displayName,
         props: item.props,
         position: item.position,
       };

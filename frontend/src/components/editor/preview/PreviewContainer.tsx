@@ -22,7 +22,7 @@ const PreviewContainer = ({
   onClick,
   elementData,
 }: PreviewContainerProps) => {
-  console.log("PreviewContainer", elementData);
+  // console.log("PreviewContainer", elementData);
   const ref = useRef(null as null | HTMLDivElement);
   const { components, setComponents } = useComponents();
   const [position, setPosition] = useState<PositionProps>({
@@ -32,7 +32,7 @@ const PreviewContainer = ({
 
   const clickHandler = useCallback(
     () => {
-      console.log("Click Index", index);
+      // console.log("Click Index", index);
       onClick(index);
     },
     // eslint-disable-next-line
@@ -66,12 +66,17 @@ const PreviewContainer = ({
     );
     if (componentIndex !== -1) {
       components[componentIndex].position = position;
+      components[componentIndex].displayName = `${elementData.name} ${
+        index + 1
+      }`;
+      setComponents && setComponents([...components]);
     } else {
-      components.push({
+      const newComponent = {
         ...elementData,
-      });
+        displayName: `${elementData.name} ${index + 1}`,
+      };
+      setComponents && setComponents([...components, newComponent]);
     }
-    setComponents && setComponents([...components]);
   };
 
   useEffect(() => {

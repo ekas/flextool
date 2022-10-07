@@ -11,6 +11,7 @@ const DraggableTable: FC<DraggableTableProps> = () => {
     type: DRAG_TYPES.COMPONENT,
     item: {
       name: "TableBlock",
+      displayName: "",
       props: {},
       position: { x: 20, y: 20, width: 320, height: 669 },
     },

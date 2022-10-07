@@ -11,6 +11,7 @@ const DraggableArticleBlock: FC<DraggableArticleBlockProps> = () => {
     type: DRAG_TYPES.COMPONENT,
     item: {
       name: "ArticleBlock",
+      displayName: "ArticleBlock",
       props: {},
       position: { x: 20, y: 20, width: 320, height: 246 },
     },

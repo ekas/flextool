@@ -6,7 +6,7 @@ interface ComponentsProviderProps {
 
 interface ComponentsContextInterface {
   //@ToDO
-  components: any[];
+  components: ComponentProps[];
   setComponents?: Function;
 }
 
@@ -20,6 +20,7 @@ export interface PositionProps {
 export interface ComponentProps {
   id: string;
   name: string;
+  displayName: string;
   props: any;
   position: PositionProps;
 }
@@ -29,11 +30,12 @@ const ComponentsContext = React.createContext<ComponentsContextInterface>({
 });
 
 export default function ComponentsProvider(props: ComponentsProviderProps) {
-  const [components, setComponents] = React.useState([
+  const [components, setComponents] = React.useState<ComponentProps[]>([
     //@ToDO
     {
       id: "a3cf32ad-5d47-4b71-af79-6c5943bd41c8",
       name: "TableBlock",
+      displayName: "",
       props: {},
       position: { x: 20, y: 20, width: 320, height: 200 },
     },
