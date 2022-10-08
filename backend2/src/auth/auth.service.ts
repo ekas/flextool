@@ -91,6 +91,7 @@ export class AuthService {
 
   generateTokens(payload: { userId: string }): Token {
     return {
+      id: payload.userId,
       accessToken: this.generateAccessToken(payload),
       refreshToken: this.generateRefreshToken(payload),
     };

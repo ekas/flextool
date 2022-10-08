@@ -45,6 +45,7 @@ export class MailSenderService {
     email: string,
     token: string
   ): Promise<boolean> {
+    console.log('sendVerifyEmailMail');
     const mailConfig = this.configService.get<MailConfig>('mail');
     const projectConfig = this.configService.get<ProjectConfig>('project');
     const buttonLink = `${projectConfig.mailVerificationUrl}?token=${token}`;

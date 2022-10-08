@@ -11,17 +11,22 @@ import { Token } from './models/token.model';
 import { LoginInput } from './dto/login.input';
 import { SignupInput } from './dto/signup.input';
 import { RefreshTokenInput } from './dto/refresh-token.input';
+import { MailSenderService } from 'src/mail-sender/mail-sender.service';
 
 @Resolver(() => Auth)
 export class AuthResolver {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private mailService: MailSenderService
+  ) {}
 
   @Mutation(() => Auth)
   async signup(@Args('data') data: SignupInput) {
     data.email = data.email.toLowerCase();
-    const { accessToken, refreshToken } = await this.authService.createUser(
+    const { accessToken, refreshToken, id } = await this.authService.createUser(
       data
     );
+    await this.mailService.sendVerifyEmailMail(data.firstName, data.email, id);
     return {
       accessToken,
       refreshToken,

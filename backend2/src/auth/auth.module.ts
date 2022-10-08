@@ -9,6 +9,7 @@ import { AuthResolver } from './auth.resolver';
 import { JwtStrategy } from './jwt.strategy';
 import { SecurityConfig } from 'src/common/configs/config.interface';
 import { AuthController } from './auth.controller';
+import { MailSenderModule } from 'src/mail-sender/mail-sender.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AuthController } from './auth.controller';
       },
       inject: [ConfigService],
     }),
+    MailSenderModule,
   ],
   providers: [
     AuthService,

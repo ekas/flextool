@@ -18,6 +18,23 @@ mutation NewRefreshToken {
   }
 }
 
+mutation signup {
+  signup(
+    data: {
+      email: "ekaspreet93.singh+test1@gmail.com"
+      firstName: "New"
+      lastName: "Son"
+      password: "password"
+    }
+  ) {
+    accessToken
+    accessToken
+    user {
+      id
+    }
+  }
+}
+
 fragment AuthTokens on Auth {
   accessToken
   refreshToken

@@ -5,6 +5,7 @@
 type Auth {
   """JWT access token"""
   accessToken: JWT!
+  id: String!
 
   """JWT refresh token"""
   refreshToken: JWT!
@@ -107,6 +108,7 @@ input SignupInput {
 type Token {
   """JWT access token"""
   accessToken: JWT!
+  id: String!
 
   """JWT refresh token"""
   refreshToken: JWT!

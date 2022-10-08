@@ -8,6 +8,8 @@ export class Token {
 
   @Field(() => GraphQLJWT, { description: 'JWT refresh token' })
   refreshToken: string;
+
+  id: string;
 }
 
 @ObjectType()
