@@ -35,7 +35,7 @@ async function main() {
       isPublic: true,
       slug: 'page1',
       definition:
-        '[{"id":"a3cf32ad-5d47-4b71-af79-6c5943bd41c8","name":"TableBlock","displayName":"TableBlock 1","props":{},"position":{"x":0,"y":20,"width":320,"height":669}}]',
+        '[{"id":"82546bf7-b745-4134-a486-68deb2db42ed","name":"TableBlock","displayName":"TableBlock 1","props":{"columns":[{"title":"Name","dataIndex":"name","key":"name"},{"title":"Age","dataIndex":"age","key":"age"},{"title":"Address","dataIndex":"address","key":"address"}],"dataSource":[{"key":"1","name":"Mike","age":32,"address":"10 Downing Street"},{"key":"2","name":"John","age":42,"address":"10 Downing Street"},{"key":"3","name":"John","age":42,"address":"10 Downing Street"},{"key":"4","name":"John","age":42,"address":"10 Downing Street"},{"key":"5","name":"John","age":42,"address":"10 Downing Street"},{"key":"6","name":"John","age":42,"address":"10 Downing Street"},{"key":"7","name":"John","age":42,"address":"10 Downing Street"},{"key":"8","name":"John","age":42,"address":"10 Downing Street"},{"key":"9","name":"John","age":42,"address":"10 Downing Street"},{"key":"10","name":"John","age":42,"address":"10 Downing Street"}]},"position":{"x":30,"y":35,"width":459,"height":687}}]',
       user: {
         connect: {
           id: user2.id,

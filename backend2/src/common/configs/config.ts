@@ -41,21 +41,22 @@ const config: Config = {
   },
   // these are used in the mail templates
   project: {
-    name: '__YOUR_PROJECT_NAME__',
+    name: 'FlexTool',
     address: '__YOUR_PROJECT_ADDRESS__',
-    logoUrl: 'https://__YOUR_PROJECT_LOGO_URL__',
-    slogan: '',
+    logoUrl:
+      'https://flextool-l34b4hwpz-ekas.vercel.app/static/media/logo.fe0850276f4cbebbb826c23deaac7f45.svg',
+    slogan: 'Build your own tool',
     color: '#123456',
     socials: [
-      ['GitHub', '__Project_GitHub_URL__'],
-      ['__Social_Media_1__', '__Social_Media_1_URL__'],
-      ['__Social_Media_2__', '__Social_Media_2_URL__'],
+      ['GitHub', 'https://github.com/ekas/flextool'],
+      ['Twitter', 'https://twitter.com/ekaspreet93'],
+      ['LinkedIn', 'https://www.linkedin.com/in/ekaspreetsingh/'],
     ],
-    url: 'http://localhost:4200',
-    mailVerificationUrl: 'http://localhost:3000/auth/verify',
-    mailChangeUrl: 'http://localhost:3000/auth/change-email',
-    resetPasswordUrl: 'http://localhost:4200/reset-password',
-    termsOfServiceUrl: 'http://localhost:4200/legal/terms',
+    url: 'https://flextool-ekas.vercel.app/',
+    mailVerificationUrl: 'https://flextool-ekas.vercel.app//auth/verify',
+    mailChangeUrl: 'https://flextool-ekas.vercel.app//auth/change-email',
+    resetPasswordUrl: 'https://flextool-ekas.vercel.app//reset-password',
+    termsOfServiceUrl: 'https://flextool-ekas.vercel.app//legal/terms',
   },
 };
 
