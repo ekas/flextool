@@ -1,88 +1,18 @@
 import { Table } from "antd";
 import { FC } from "react";
 
-const TableBlock: FC = () => {
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-    {
-      key: "3",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-    {
-      key: "4",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-    {
-      key: "5",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
+type TableColumnProps = {
+  title: string;
+  dataIndex: string;
+  key: string;
+};
 
-    {
-      key: "6",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-    {
-      key: "7",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-    {
-      key: "8",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-    {
-      key: "9",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-    {
-      key: "10",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
+interface TableBlockProps {
+  dataSource: any[];
+  columns: TableColumnProps[];
+}
 
-  const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-    },
-  ];
+const TableBlock: FC<TableBlockProps> = ({ columns, dataSource }) => {
   return <Table dataSource={dataSource} columns={columns} />;
 };
 

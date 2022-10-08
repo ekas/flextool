@@ -5,7 +5,6 @@ import TableBlock from "../elements/TableBlock";
 import ArticleBlock from "../elements/ArticleBlock";
 import PreviewContainer from "./PreviewContainer";
 import { v4 as uuidv4 } from "uuid";
-import { useComponents } from "contexts/ComponentsContext";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
 import { PAGE_EDIT } from "queries/page.query";
@@ -24,16 +23,24 @@ const Preview = ({
   isPagePreviewable,
 }) => {
   const [focused, setFocused] = useState();
-  const { components, setComponents } = useComponents();
-  const [componentsData, setComponentsData] = useState([...components]);
+  const [componentsData, setComponentsData] = useState([]);
 
   const deleteComponentHandler = (index) => {
-    setComponents &&
-      setComponents([
-        ...components.filter((component) => component.id !== index),
-      ]);
     setComponentsData([
       ...componentsData.filter((component) => component.id !== index),
+    ]);
+  };
+
+  const settingsComponentHandler = (index) => {
+    setComponentsData([
+      ...componentsData.map((component) => {
+        return component.id === index
+          ? {
+              ...component,
+              displayName: "Ekas Component",
+            }
+          : component;
+      }),
     ]);
   };
 
@@ -49,7 +56,6 @@ const Preview = ({
 
   useEffect(() => {
     if (pageData) {
-      setComponents([...JSON.parse(pageData.definition)]);
       setComponentsData([...JSON.parse(pageData.definition)]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,10 +64,11 @@ const Preview = ({
   useEffect(() => {
     pageQueryType === "save" &&
       editPage({
-        variables: { ...pageData, definition: JSON.stringify(components) },
+        variables: { ...pageData, definition: JSON.stringify(componentsData) },
       });
     pageQueryType === "preview" &&
       editPage({ variables: { ...pageData, isPublic: true } });
+    setPageQueryType(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageQueryType]);
 
@@ -103,18 +110,15 @@ const Preview = ({
         width: isPagePreviewable ? "100%" : null,
       }}
     >
-      <div
-        className="previewContainer2"
-        style={{
-          width: "100%",
-        }}
-      >
+      <div className="previewContainer2">
         <ComponentPreview
-          components={componentsData}
+          componentsData={componentsData}
           clickHandler={clickHandler}
           focused={focused}
           deleteComponentHandler={deleteComponentHandler}
+          settingsComponentHandler={settingsComponentHandler}
           isPagePreviewable={isPagePreviewable}
+          setComponentsData={setComponentsData}
         />
       </div>
     </div>
@@ -122,15 +126,17 @@ const Preview = ({
 };
 
 const ComponentPreview = ({
-  components,
+  componentsData,
   clickHandler,
   focused,
   deleteComponentHandler,
+  settingsComponentHandler,
   isPagePreviewable,
+  setComponentsData,
 }) => {
   return (
     <>
-      {components.map((component, index) => {
+      {componentsData.map((component, index) => {
         if (typeof PreviewComponents[component.name] !== "undefined") {
           const NewComponent = createElement(
             PreviewComponents[component.name],
@@ -149,7 +155,10 @@ const ComponentPreview = ({
               focused: focused === index ? true : false,
               elementData: component,
               deleteHandler: deleteComponentHandler,
+              settingsHandler: settingsComponentHandler,
               isPagePreviewable: isPagePreviewable,
+              componentsData: componentsData,
+              setComponentsData: setComponentsData,
             },
             [NewComponent]
           );

@@ -1,11 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Rnd } from "react-rnd";
 import ElementActions from "../elementActions";
-import {
-  ComponentProps,
-  PositionProps,
-  useComponents,
-} from "contexts/ComponentsContext";
+import { ComponentProps, PositionProps } from "contexts/ComponentsContext";
 
 interface PreviewContainerProps {
   index: number;
@@ -13,8 +9,11 @@ interface PreviewContainerProps {
   onClick: Function;
   children: React.ReactNode;
   elementData: ComponentProps;
+  componentsData: ComponentProps[];
   isPagePreviewable: boolean;
   deleteHandler: (elementId: string) => void;
+  settingsHandler: (elementId: string) => void;
+  setComponentsData: Function;
 }
 
 const PreviewContainer = ({
@@ -24,11 +23,12 @@ const PreviewContainer = ({
   onClick,
   elementData,
   deleteHandler,
+  settingsHandler,
   isPagePreviewable,
+  componentsData,
+  setComponentsData,
 }: PreviewContainerProps) => {
-  // console.log("PreviewContainer", elementData);
   const ref = useRef(null as null | HTMLDivElement);
-  const { components, setComponents } = useComponents();
   const [position, setPosition] = useState<PositionProps>({
     ...elementData.position,
   });
@@ -36,7 +36,6 @@ const PreviewContainer = ({
 
   const clickHandler = useCallback(
     () => {
-      // console.log("Click Index", index);
       onClick(index);
     },
     // eslint-disable-next-line
@@ -60,38 +59,47 @@ const PreviewContainer = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(
     () =>
-      console.log("-------------------------------------------", components),
-    [components]
+      console.log(
+        "------------------componentsData------------------",
+        componentsData
+      ),
+    [componentsData]
   );
 
-  const setcomponentsHandler = () => {
-    const componentIndex = components.findIndex(
+  const setcomponentsHandler = useCallback(() => {
+    const componentIndex = componentsData.findIndex(
       (component) => component.id === elementData.id
     );
     if (componentIndex !== -1) {
-      components[componentIndex].position = position;
-      components[componentIndex].displayName = `${elementData.name} ${
-        index + 1
-      }`;
-      setComponents && setComponents([...components]);
+      componentsData[componentIndex].position = position;
+      componentsData[componentIndex].displayName = elementData.displayName
+        ? `${elementData.displayName}`
+        : `${elementData.name} ${index + 1}`;
+      setComponentsData && setComponentsData([...componentsData]);
     } else {
       const newComponent = {
         ...elementData,
-        displayName: `${elementData.name} ${index + 1}`,
+        displayName: elementData.displayName
+          ? `${elementData.displayName}`
+          : `${elementData.name} ${index + 1}`,
       };
-      setComponents && setComponents([...components, newComponent]);
+      setComponentsData && setComponentsData([...componentsData, newComponent]);
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [position]);
 
   const deleteComponentHandler = (elementId: string) => {
     deleteHandler(elementId);
   };
 
+  const settingsComponentHandler = (elementId: string) => {
+    settingsHandler(elementId);
+  };
+
   useEffect(() => {
     console.log("position updated", position);
     setcomponentsHandler();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [position]);
+  }, [position, setcomponentsHandler]);
 
   const { width, height } = position;
   return (
@@ -117,18 +125,21 @@ const PreviewContainer = ({
         border: focused
           ? "1px solid var(--primary)"
           : hovered
-          ? "1px solid var(--grey-background)"
-          : "none",
+          ? "1px solid var(--grey-background4)"
+          : "1px solid var(--grey-light)",
       }}
       disableDragging={isPagePreviewable}
       className="dnd-container"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {!isPagePreviewable && (hovered || focused) && (
+      {!isPagePreviewable && (
         <ElementActions
-          displayName={elementData.name}
+          displayName={
+            elementData.displayName ? elementData.displayName : elementData.name
+          }
           onDelete={deleteComponentHandler}
+          onSettings={settingsComponentHandler}
           elementId={elementData.id}
         />
       )}
