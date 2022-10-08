@@ -97,8 +97,10 @@ const PreviewContainer = ({
   };
 
   useEffect(() => {
-    console.log("position updated", position);
-    setcomponentsHandler();
+    if (position.x !== 0 && position.y !== 20) {
+      console.log("position updated", position);
+      setcomponentsHandler();
+    }
   }, [position, setcomponentsHandler]);
 
   const { width, height } = position;
