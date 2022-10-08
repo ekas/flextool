@@ -12,7 +12,11 @@ const DraggableArticleBlock: FC<DraggableArticleBlockProps> = () => {
     item: {
       name: "ArticleBlock",
       displayName: "ArticleBlock",
-      props: {},
+      props: {
+        name: "bokuweb",
+        username: "bokuweb17",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.",
+      },
       position: { x: 50, y: 50, width: 320, height: 246 },
     },
   });

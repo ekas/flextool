@@ -1,7 +1,13 @@
 import { FC } from "react";
 import logo from "../../../assets/logo.svg";
 
-const ArticleBlock: FC = () => {
+interface ArticleBlockProps {
+  name: string;
+  username: string;
+  text: string;
+}
+
+const ArticleBlock: FC<ArticleBlockProps> = ({ name, username, text }) => {
   return (
     <div
       className="box"
@@ -16,33 +22,12 @@ const ArticleBlock: FC = () => {
         <div className="media-content">
           <div className="content">
             <p>
-              <strong>bokuweb</strong> <small>@bokuweb17</small>{" "}
+              <strong>{name}</strong> <small>@{username}</small>{" "}
               <small>31m</small>
               <br />
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              efficitur sit amet massa fringilla egestas. Nullam condimentum
-              luctus turpis.
+              {text}
             </p>
           </div>
-          <nav className="level is-mobile">
-            <div className="level-left">
-              <a href="/" className="level-item">
-                <span className="icon is-small">
-                  <i className="fa fa-reply" />
-                </span>
-              </a>
-              <a href="/" className="level-item">
-                <span className="icon is-small">
-                  <i className="fa fa-retweet" />
-                </span>
-              </a>
-              <a href="/" className="level-item">
-                <span className="icon is-small">
-                  <i className="fa fa-heart" />
-                </span>
-              </a>
-            </div>
-          </nav>
         </div>
       </article>
     </div>

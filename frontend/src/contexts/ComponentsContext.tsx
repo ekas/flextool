@@ -5,7 +5,6 @@ interface ComponentsProviderProps {
 }
 
 interface ComponentsContextInterface {
-  //@ToDO
   components: ComponentProps[];
   setComponents?: Function;
 }

@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
 import { PAGE_EDIT } from "queries/page.query";
+import ElementSettingsDrawer from "../elementSettingsDrawer";
 
 import "./index.less";
 
@@ -24,24 +25,23 @@ const Preview = ({
 }) => {
   const [focused, setFocused] = useState();
   const [componentsData, setComponentsData] = useState([]);
+  const [settingsElementId, setSettingsElementId] = useState(null);
+  const [isSettingsDrawerOpen, setSettingsDrawerOpen] = useState(false);
 
-  const deleteComponentHandler = (index) => {
+  useEffect(() => {
+    if (settingsElementId !== null) {
+      setSettingsDrawerOpen(true);
+    }
+  }, [settingsElementId]);
+
+  const deleteComponentHandler = (elementId) => {
     setComponentsData([
-      ...componentsData.filter((component) => component.id !== index),
+      ...componentsData.filter((component) => component.id !== elementId),
     ]);
   };
 
-  const settingsComponentHandler = (index) => {
-    setComponentsData([
-      ...componentsData.map((component) => {
-        return component.id === index
-          ? {
-              ...component,
-              displayName: "Ekas Component",
-            }
-          : component;
-      }),
-    ]);
+  const settingsComponentHandler = (elementId) => {
+    setSettingsElementId(elementId);
   };
 
   const [editPage] = useMutation(PAGE_EDIT, {
@@ -103,25 +103,37 @@ const Preview = ({
   });
 
   return (
-    <div
-      ref={drop}
-      className="previewContainer"
-      style={{
-        width: isPagePreviewable ? "100%" : null,
-      }}
-    >
-      <div className="previewContainer2">
-        <ComponentPreview
+    <>
+      <div
+        ref={drop}
+        className="previewContainer"
+        style={{
+          width: isPagePreviewable ? "100%" : null,
+        }}
+      >
+        <div className="previewContainer2">
+          <ComponentPreview
+            componentsData={componentsData}
+            clickHandler={clickHandler}
+            focused={focused}
+            deleteComponentHandler={deleteComponentHandler}
+            settingsComponentHandler={settingsComponentHandler}
+            isPagePreviewable={isPagePreviewable}
+            setComponentsData={setComponentsData}
+          />
+        </div>
+      </div>
+      {settingsElementId !== null && componentsData.length !== 0 && (
+        <ElementSettingsDrawer
           componentsData={componentsData}
-          clickHandler={clickHandler}
-          focused={focused}
-          deleteComponentHandler={deleteComponentHandler}
-          settingsComponentHandler={settingsComponentHandler}
-          isPagePreviewable={isPagePreviewable}
+          settingsElementId={settingsElementId}
+          setSettingsElementId={setSettingsElementId}
+          isSettingsDrawerOpen={isSettingsDrawerOpen}
+          setSettingsDrawerOpen={setSettingsDrawerOpen}
           setComponentsData={setComponentsData}
         />
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
@@ -141,7 +153,6 @@ const ComponentPreview = ({
           const NewComponent = createElement(
             PreviewComponents[component.name],
             {
-              // @TODO: Use a hash here?
               key: component.id,
               ...component.props,
             }
