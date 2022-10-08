@@ -21,6 +21,7 @@ const Page: FC = () => {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<User | undefined>(undefined);
   const [pageData, setPageData] = useState<PageItem>();
+  const [isPagePreviewable, setPagePreviewable] = useState<boolean>(false);
   const [pageQueryType, setPageQueryType] = useState<"save" | "preview" | null>(
     null
   );
@@ -31,6 +32,7 @@ const Page: FC = () => {
 
   const pagePreviewHandler = () => {
     setPageQueryType("preview");
+    setPagePreviewable(true);
   };
 
   const [userQuery] = useLazyQuery(USER_DATA_QUERY, {
@@ -60,6 +62,13 @@ const Page: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageId]);
 
+  useEffect(() => {
+    if (userData && userData.role !== "DEVELOPER") {
+      setPagePreviewable(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userData]);
+
   return (
     <>
       <NavBarPage
@@ -79,13 +88,16 @@ const Page: FC = () => {
                   pageData={pageData}
                   pageQueryType={pageQueryType}
                   setPageQueryType={setPageQueryType}
+                  isPagePreviewable={isPagePreviewable}
                 />
               </div>
-              <div className="page pageRight">
-                <div className="draggableComponentContainer">
-                  <ElementList />
+              {isPagePreviewable === false && (
+                <div className="page pageRight">
+                  <div className="draggableComponentContainer">
+                    <ElementList />
+                  </div>
                 </div>
-              </div>
+              )}
             </ComponentsProvider>
           </div>
         </Spin>

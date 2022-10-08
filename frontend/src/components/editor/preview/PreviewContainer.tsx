@@ -13,6 +13,7 @@ interface PreviewContainerProps {
   onClick: Function;
   children: React.ReactNode;
   elementData: ComponentProps;
+  isPagePreviewable: boolean;
   deleteHandler: (elementId: string) => void;
 }
 
@@ -23,6 +24,7 @@ const PreviewContainer = ({
   onClick,
   elementData,
   deleteHandler,
+  isPagePreviewable,
 }: PreviewContainerProps) => {
   // console.log("PreviewContainer", elementData);
   const ref = useRef(null as null | HTMLDivElement);
@@ -110,7 +112,7 @@ const PreviewContainer = ({
       minWidth={width}
       minHeight={height && height + 20}
       bounds="window"
-      onClick={clickHandler}
+      onClick={!isPagePreviewable && clickHandler}
       style={{
         border: focused
           ? "1px solid var(--primary)"
@@ -118,11 +120,12 @@ const PreviewContainer = ({
           ? "1px solid var(--grey-background)"
           : "none",
       }}
+      disableDragging={isPagePreviewable}
       className="dnd-container"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {(hovered || focused) && (
+      {!isPagePreviewable && (hovered || focused) && (
         <ElementActions
           displayName={elementData.name}
           onDelete={deleteComponentHandler}

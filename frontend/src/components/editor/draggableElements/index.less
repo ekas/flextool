@@ -1,10 +1,17 @@
 .draggableComponent {
   margin: 5px;
-  width: 100px;
-  height: 100px;
+  width: 85px;
+  height: 85px;
   display: flex;
+  padding: 9px;
+  font-size: 15px;
   cursor: crosshair;
   align-items: center;
   justify-content: center;
-  background-color: var(--grey-background);
+  border-radius: 9px;
+  border: 1px solid var(--grey-background3);
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }

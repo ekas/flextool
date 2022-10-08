@@ -17,7 +17,12 @@ const PreviewComponents = {
   ArticleBlock,
 };
 
-const Preview = ({ pageData, pageQueryType, setPageQueryType }) => {
+const Preview = ({
+  pageData,
+  pageQueryType,
+  setPageQueryType,
+  isPagePreviewable,
+}) => {
   const [focused, setFocused] = useState();
   const { components, setComponents } = useComponents();
   const [componentsData, setComponentsData] = useState([...components]);
@@ -91,13 +96,25 @@ const Preview = ({ pageData, pageQueryType, setPageQueryType }) => {
   });
 
   return (
-    <div ref={drop} className="previewContainer">
-      <div className="previewContainer2">
+    <div
+      ref={drop}
+      className="previewContainer"
+      style={{
+        width: isPagePreviewable ? "100%" : null,
+      }}
+    >
+      <div
+        className="previewContainer2"
+        style={{
+          width: "100%",
+        }}
+      >
         <ComponentPreview
           components={componentsData}
           clickHandler={clickHandler}
           focused={focused}
           deleteComponentHandler={deleteComponentHandler}
+          isPagePreviewable={isPagePreviewable}
         />
       </div>
     </div>
@@ -109,6 +126,7 @@ const ComponentPreview = ({
   clickHandler,
   focused,
   deleteComponentHandler,
+  isPagePreviewable,
 }) => {
   return (
     <>
@@ -131,6 +149,7 @@ const ComponentPreview = ({
               focused: focused === index ? true : false,
               elementData: component,
               deleteHandler: deleteComponentHandler,
+              isPagePreviewable: isPagePreviewable,
             },
             [NewComponent]
           );
