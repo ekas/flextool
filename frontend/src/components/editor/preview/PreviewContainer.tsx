@@ -120,7 +120,7 @@ const PreviewContainer = ({
         setPosition({ ...position, x: d.x, y: d.y });
       }}
       minWidth={width}
-      minHeight={height && height + 20}
+      minHeight={height && height + 10}
       bounds="window"
       onClick={!isPagePreviewable && clickHandler}
       style={{

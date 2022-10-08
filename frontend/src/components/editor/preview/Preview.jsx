@@ -1,21 +1,15 @@
 import { DRAG_TYPES } from "constants/DragTypes";
 import { createElement, useCallback, useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
-import TableBlock from "../elements/TableBlock";
-import ArticleBlock from "../elements/ArticleBlock";
 import PreviewContainer from "./PreviewContainer";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
 import { PAGE_EDIT } from "queries/page.query";
 import ElementSettingsDrawer from "../elementSettingsDrawer";
+import { PreviewComponentsList } from "./PreviewComponentsList";
 
 import "./index.less";
-
-const PreviewComponents = {
-  TableBlock,
-  ArticleBlock,
-};
 
 const Preview = ({
   pageData,
@@ -149,9 +143,9 @@ const ComponentPreview = ({
   return (
     <>
       {componentsData.map((component, index) => {
-        if (typeof PreviewComponents[component.name] !== "undefined") {
+        if (typeof PreviewComponentsList[component.name] !== "undefined") {
           const NewComponent = createElement(
-            PreviewComponents[component.name],
+            PreviewComponentsList[component.name],
             {
               key: component.id,
               ...component.props,

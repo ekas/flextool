@@ -4,9 +4,7 @@ import { DRAG_TYPES } from "constants/DragTypes";
 
 import "./index.less";
 
-interface DraggableTableProps {}
-
-const DraggableTable: FC<DraggableTableProps> = () => {
+const DraggableTable: FC = () => {
   const [, drag] = useDrag({
     type: DRAG_TYPES.COMPONENT,
     item: {
@@ -99,7 +97,7 @@ const DraggableTable: FC<DraggableTableProps> = () => {
   });
   return (
     <div ref={drag} className="draggableComponent">
-      Table Block
+      Table
     </div>
   );
 };
