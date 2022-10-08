@@ -70,6 +70,7 @@ const ElementSettingsDrawer: FC<ElementSettingsDrawerProps> = ({
             }),
           ]);
           toast.success(`Settings for ${name} updated successfully!`);
+          onSettingsDrawerClose();
         }}
       >
         <Form.Item name="displayName" label="Display Name">
