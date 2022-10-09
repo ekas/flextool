@@ -56,16 +56,6 @@ const PreviewContainer = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => getComponentDimensions(), []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(
-    () =>
-      console.log(
-        "------------------componentsData------------------",
-        componentsData
-      ),
-    [componentsData]
-  );
-
   const setcomponentsHandler = useCallback(() => {
     const componentIndex = componentsData.findIndex(
       (component) => component.id === elementData.id
@@ -98,7 +88,6 @@ const PreviewContainer = ({
 
   useEffect(() => {
     if (position.x !== 0 && position.y !== 20) {
-      console.log("position updated", position);
       setcomponentsHandler();
     }
   }, [position, setcomponentsHandler]);

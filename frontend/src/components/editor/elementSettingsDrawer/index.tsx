@@ -132,15 +132,12 @@ const ElementSettingsDrawer: FC<ElementSettingsDrawerProps> = ({
             theme={"rjv-default"}
             src={formData.props}
             onEdit={(e) => {
-              console.log("edit", e.updated_src);
               setFormData({ ...formData, props: e.updated_src });
             }}
             onDelete={(e) => {
-              console.log("delete", e.updated_src);
               setFormData({ ...formData, props: e.updated_src });
             }}
             onAdd={(e) => {
-              console.log("add", e.updated_src);
               setFormData({ ...formData, props: e.updated_src });
             }}
             displayObjectSize={true}
