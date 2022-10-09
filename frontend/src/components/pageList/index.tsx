@@ -9,7 +9,6 @@ import {
   Input,
   List,
   Menu,
-  Row,
   Spin,
 } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
@@ -154,20 +153,12 @@ export const PageList: FC<PageListProps> = () => {
   return (
     <>
       <NavBarPage type="pages" userData={userData} />
-      <Row className="mainContainer" gutter={16}>
-        <Col className="gutter-row leftCol" span={6}>
-          <div className="">
-            <h4>All(1)</h4>
-            <h4>Recent(0)</h4>
-            <h4>Starred(1)</h4>
-            <h4>Trash(1)</h4>
-          </div>
-        </Col>
-        <Col className="gutter-row rightCol" span={18}>
+      <div className="mainContainer">
+        <Col className=" rightCol" span={16}>
           <Spin spinning={loading}>
-            <div className="rightHeaderContainer">
+            <div>
               <div className="rightHeader">
-                <h2>All</h2>
+                <h2>Pages</h2>
                 <span>
                   <Search
                     className="searchField"
@@ -238,7 +229,7 @@ export const PageList: FC<PageListProps> = () => {
             </div>
           </Spin>
         </Col>
-      </Row>
+      </div>
       <CustomModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
