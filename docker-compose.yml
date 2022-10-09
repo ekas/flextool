@@ -28,18 +28,32 @@ services:
       - pgadmin-data:/var/lib/pgadmin
     restart: unless-stopped
 
-  prisma-postgres-api:
+  api:
     stdin_open: true
     build:
-      context: .
+      context: ./backend2
       dockerfile: Dockerfile
-    container_name: prisma-postgres-api
+    container_name: api
     depends_on:
       - postgres
     env_file:
-      - .env
+      - ./backend2/.env
     ports:
       - '5000:5000'
+    restart: always
+
+  ui:
+    stdin_open: true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ui
+    depends_on:
+      - api
+    env_file:
+      - ./frontend/.env
+    ports:
+      - '3000:3000'
     restart: always
 
 volumes:
