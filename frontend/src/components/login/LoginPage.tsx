@@ -63,7 +63,7 @@ export const LoginPage: FC<LoginProps> = () => {
               or
             </Divider>
             <Form
-              name="normal_login"
+              name="flextool_login"
               className="loginForm"
               initialValues={{ remember: true }}
               onFinish={() =>

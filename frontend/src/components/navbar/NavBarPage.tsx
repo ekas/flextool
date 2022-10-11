@@ -53,6 +53,7 @@ const NavBarPage: FC<NavBarPageProps> = ({
             <img src={logo} alt="Logo" className="appLogo" />
             <Menu.Item
               key="pages"
+              className="menuItemPages"
               icon={<img src={appsIcon} alt="Pages Menu" />}
             >
               Pages
@@ -64,7 +65,7 @@ const NavBarPage: FC<NavBarPageProps> = ({
             arrow
             placement="bottomRight"
           >
-            <a onClick={(e) => e.preventDefault()}>
+            <a onClick={(e) => e.preventDefault()} className="menuAvatarAnchor">
               <Space>
                 <Avatar size={35} icon={<UserOutlined />} />
                 <CaretDownOutlined />
@@ -167,6 +168,7 @@ const userMenu = (userData: User | null) => (
       {
         key: "2",
         danger: true,
+        className: "logoutBtn",
         label: "Logout",
         onClick: () => {
           localStorage.removeItem("auth");

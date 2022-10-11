@@ -181,7 +181,7 @@ export const PageList: FC<PageListProps> = () => {
                         setIsModalOpen(true);
                       }}
                     >
-                      Create New
+                      Create New Page
                     </Button>
                   )}
                 </span>
@@ -203,7 +203,7 @@ export const PageList: FC<PageListProps> = () => {
                       userData && userData.role === "DEVELOPER" ? (
                         <Dropdown
                           overlay={appMenu(page, pageDelete, pageRenameModal)}
-                          className="menuAvatar"
+                          className="menuAvatar menuPerPage"
                           arrow
                           placement="bottomRight"
                         >
@@ -218,7 +218,11 @@ export const PageList: FC<PageListProps> = () => {
                       avatar={
                         <img src={appAvatar} alt="App Avatar" className="" />
                       }
-                      title={<Link to={page.id}>{page.name}</Link>}
+                      title={
+                        <Link to={page.id} className="pageListItem">
+                          {page.name}
+                        </Link>
+                      }
                       description={`Last edited on ${new Date(
                         page.updatedAt
                       ).toDateString()}`}
@@ -263,6 +267,7 @@ const appMenu = (
       {
         key: "1",
         label: "Rename",
+
         onClick: () => {
           pageRenameModal(pageData);
         },
