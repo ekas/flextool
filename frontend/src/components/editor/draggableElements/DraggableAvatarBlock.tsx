@@ -10,8 +10,8 @@ const DraggableAvatarBlock: FC = () => {
     item: {
       name: "AvatarBlock",
       displayName: "AvatarBlock",
-      props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      props: { badgeCount: 10 },
+      position: { x: 50, y: 50, width: 300, height: 80 },
     },
   });
   return (

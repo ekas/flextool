@@ -10,8 +10,12 @@ const DraggableDividerBlock: FC = () => {
     item: {
       name: "DividerBlock",
       displayName: "DividerBlock",
-      props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      props: {
+        orientation: "center",
+        dashed: false,
+        plain: false,
+      },
+      position: { x: 50, y: 50, width: 1000, height: 20 },
     },
   });
   return (

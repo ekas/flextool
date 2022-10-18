@@ -10,8 +10,11 @@ const DraggableButtonBlock: FC = () => {
     item: {
       name: "ButtonBlock",
       displayName: "ButtonBlock",
-      props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      props: {
+        buttonLabel: "Button",
+        buttonType: "primary",
+      },
+      position: { x: 50, y: 50, width: 300, height: 80 },
     },
   });
   return (

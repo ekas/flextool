@@ -10,8 +10,8 @@ const DraggableDropDownBlock: FC = () => {
     item: {
       name: "DropDownBlock",
       displayName: "DropDownBlock",
-      props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      props: { label: "Custom Label", placement: "bottomLeft" },
+      position: { x: 50, y: 50, width: 300, height: 50 },
     },
   });
   return (

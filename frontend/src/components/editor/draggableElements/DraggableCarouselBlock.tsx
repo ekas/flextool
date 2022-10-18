@@ -10,8 +10,10 @@ const DraggableCarouselBlock: FC = () => {
     item: {
       name: "CarouselBlock",
       displayName: "CarouselBlock",
-      props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      props: {
+        carouselItems: ["Slide 1", "Slide 2", "Slide 3"],
+      },
+      position: { x: 50, y: 50, width: 400, height: 150 },
     },
   });
   return (

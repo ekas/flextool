@@ -11,7 +11,7 @@ import DraggableDatePickerBlock from "../draggableElements/DraggableDatePickerBl
 import DraggableAutoCompleteBlock from "../draggableElements/DraggableAutoCompleteBlock";
 import DraggableTimePickerBlock from "../draggableElements/DraggableTimePickerBlock";
 import DraggableAvatarBlock from "../draggableElements/DraggableAvatarBlock";
-import DraggableBadgeBlock from "../draggableElements/DraggableBadgeBlock";
+import DraggableAvatarGroupBlock from "../draggableElements/DraggableAvatarGroupBlock";
 import DraggableButtonBlock from "../draggableElements/DraggableButtonBlock";
 import DraggableCardBlock from "../draggableElements/DraggableCardBlock";
 import DraggableCarouselBlock from "../draggableElements/DraggableCarouselBlock";
@@ -41,7 +41,7 @@ const ElementList: FC<ElementListProps> = () => {
       <DraggableAutoCompleteBlock />
       <DraggableTimePickerBlock />
       <DraggableAvatarBlock />
-      <DraggableBadgeBlock />
+      <DraggableAvatarGroupBlock />
       <DraggableButtonBlock />
       <DraggableCardBlock />
       <DraggableCarouselBlock />

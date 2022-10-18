@@ -11,7 +11,7 @@ const DraggableAutoCompleteBlock: FC = () => {
       name: "AutoCompleteBlock",
       displayName: "AutoCompleteBlock",
       props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      position: { x: 50, y: 50, width: 300, height: 80 },
     },
   });
   return (

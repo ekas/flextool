@@ -10,8 +10,13 @@ const DraggableInputNumberBlock: FC = () => {
     item: {
       name: "InputNumberBlock",
       displayName: "InputNumberBlock",
-      props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      props: {
+        placeholder: "InputNumber Placeholder",
+        min: 2,
+        max: 10,
+        defaultValue: 10,
+      },
+      position: { x: 50, y: 50, width: 300, height: 80 },
     },
   });
   return (

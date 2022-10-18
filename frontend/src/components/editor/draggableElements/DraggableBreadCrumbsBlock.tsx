@@ -11,7 +11,7 @@ const DraggableBreadCrumbsBlock: FC = () => {
       name: "BreadCrumbsBlock",
       displayName: "BreadCrumbsBlock",
       props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      position: { x: 50, y: 50, width: 1000, height: 40 },
     },
   });
   return (

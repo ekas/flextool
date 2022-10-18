@@ -10,8 +10,33 @@ const DraggableDescriptionBlock: FC = () => {
     item: {
       name: "DescriptionBlock",
       displayName: "DescriptionBlock",
-      props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      props: {
+        title: "User Data",
+        descriptions: [
+          {
+            label: "UserName",
+            content: "Zhou Maomao",
+          },
+          {
+            label: "Telephone",
+            content: "1810000000",
+          },
+          {
+            label: "Live",
+            content: "Hangzhou, Zhejiang",
+          },
+          {
+            label: "Remark",
+            content: "empty",
+          },
+          {
+            label: "Address",
+            content:
+              "No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China",
+          },
+        ],
+      },
+      position: { x: 50, y: 50, width: 400, height: 150 },
     },
   });
   return (

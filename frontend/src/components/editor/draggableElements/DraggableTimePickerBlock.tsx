@@ -8,10 +8,10 @@ const DraggableTimePickerBlock: FC = () => {
   const [, drag] = useDrag({
     type: DRAG_TYPES.COMPONENT,
     item: {
-      name: "TimePickerBlock",
-      displayName: "TimePickerBlock",
+      name: "DateTimePicker",
+      displayName: "DateTimePicker",
       props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      position: { x: 50, y: 50, width: 300, height: 80 },
     },
   });
   return (

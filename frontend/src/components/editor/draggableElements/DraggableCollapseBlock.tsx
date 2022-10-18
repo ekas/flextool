@@ -10,8 +10,23 @@ const DraggableCollapseBlock: FC = () => {
     item: {
       name: "CollapseBlock",
       displayName: "CollapseBlock",
-      props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      props: {
+        data: [
+          {
+            panelHeading: "Panel Heading 1",
+            panelDescription: "Panel Description 1",
+          },
+          {
+            panelHeading: "Panel Heading 2",
+            panelDescription: "Panel Description 2",
+          },
+          {
+            panelHeading: "Panel Heading 3",
+            panelDescription: "Panel Description 3",
+          },
+        ],
+      },
+      position: { x: 50, y: 50, width: 500, height: 300 },
     },
   });
   return (

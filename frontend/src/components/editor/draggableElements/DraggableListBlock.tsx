@@ -11,7 +11,7 @@ const DraggableListBlock: FC = () => {
       name: "ListBlock",
       displayName: "ListBlock",
       props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      position: { x: 50, y: 50, width: 400, height: 80 },
     },
   });
   return (

@@ -10,8 +10,10 @@ const DraggableInputBlock: FC = () => {
     item: {
       name: "InputBlock",
       displayName: "InputBlock",
-      props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      props: {
+        placeholder: "Input Placeholder",
+      },
+      position: { x: 50, y: 50, width: 300, height: 80 },
     },
   });
   return (
