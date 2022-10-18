@@ -10,13 +10,13 @@ const DraggableFormBlock: FC = () => {
     item: {
       name: "FormBlock",
       displayName: "FormBlock",
-      props: {},
-      position: { x: 50, y: 50, width: 1000, height: 80 },
+      props: { fieldAName: "Email", fieldBName: "Password" },
+      position: { x: 50, y: 50, width: 500, height: 300 },
     },
   });
   return (
     <div ref={drag} className="draggableComponent">
-      Form
+      Login Form
     </div>
   );
 };

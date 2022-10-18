@@ -10,7 +10,17 @@ const DraggableStepsBlock: FC = () => {
     item: {
       name: "StepsBlock",
       displayName: "StepsBlock",
-      props: {},
+      props: {
+        stepsData: [
+          {
+            title: "Step 1",
+            description: "Step 1 description",
+            subTitle: "Step 1 subtitle",
+          },
+          { title: "Step 2", description: "Step 2 description" },
+          { title: "Step 3", description: "Step 3 description" },
+        ],
+      },
       position: { x: 50, y: 50, width: 1000, height: 80 },
     },
   });
