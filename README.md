@@ -1,4 +1,9 @@
-# FlexTool
+<p align="center">
+  <img src="https://flextool.vercel.app/static/media/logo.fe0850276f4cbebbb826c23deaac7f45.svg" width="320" alt="logo" />
+</p>
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 Platform for building internal tools
 
