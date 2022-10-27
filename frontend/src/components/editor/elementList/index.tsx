@@ -41,9 +41,7 @@ const ElementList: FC<ElementListProps> = () => {
       <DraggableAutoCompleteBlock />
       <DraggableTimePickerBlock />
       <DraggableAvatarBlock />
-      <DraggableAvatarGroupBlock />
       <DraggableButtonBlock />
-      <DraggableCardBlock />
       <DraggableCarouselBlock />
       <DraggableCheckboxBlock />
       <DraggableCollapseBlock />
